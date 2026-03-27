@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@variant dark (&:where(.dark, .dark *)); /* ← deze regel toevoegen */
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-secondary: var(--brand-secondary);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #1e1b4b;
+  --brand-accent: #ec4899;
+  --brand-secondary: #f97316;
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --brand-accent: #22d3ee;
+  --brand-secondary: #818cf8;
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, p {
+    @apply transition-colors duration-500;
+  }
+}
