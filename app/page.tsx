@@ -1,132 +1,138 @@
 "use client"
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { useStyle } from "@/components/ThemeProvider"
 
+const HOME_CONFIG = {
+  hero: {
+    title: "CREATE IMPACT.",
+    subtitle: "DESIGN.",
+    description: "Ik vertaal complexe ideeën naar heldere, esthetische visuals die impact maken.",
+    mainImage: "/img/cinecity6.png", 
+  },
+  previews: [
+    {
+      id: 1,
+      title: "Branding Project",
+      category: "Branding",
+      image: "/img/kelloggsdoos.jpg",
+    },
+    {
+      id: 2,
+      title: "Digital Design",
+      category: "Design",
+      image: "/img/cinecity3.png",
+    }
+  ]
+};
+
 export default function HomePage() {
-  const { style } = useStyle()
-  const isColorful = style === "colorful"
+  const styleContext = useStyle();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isColorful = styleContext ? styleContext.style === "colorful" : true;
+
+  if (!mounted) return null;
 
   return (
-    <div className={`w-full space-y-16 transition-colors duration-500 ${
-      isColorful 
-        ? "bg-gradient-to-br from-pink-100 via-white to-orange-100 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800" 
-        : "bg-white dark:bg-slate-900"
+    <div className={`relative w-full min-h-screen transition-all duration-700 overflow-x-hidden ${
+      isColorful ? "bg-[#fafafa] dark:bg-[#050505]" : "bg-white dark:bg-slate-950"
     }`}>
       
-      {/* Hero Sectie */}
-      <div className="flex flex-col items-center text-center space-y-8 py-24 px-6 md:px-16">
-        <div className="space-y-6 max-w-4xl mx-auto">
-          <div className="flex flex-col items-center space-y-4">
-            <span className={`px-5 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase text-white ${
-              isColorful 
-                ? "bg-gradient-to-r from-pink-500 to-orange-400 dark:from-cyan-500 dark:to-blue-500" 
-                : "bg-indigo-600 dark:bg-indigo-500"
-            }`}>
-              Graphic & Visual Design
-            </span>
-            <p className={`text-2xl text-indigo-950 dark:text-white ${isColorful ? "font-bold" : "font-medium"}`}>
-              Joy Bevers
+      {/* ACHTERGROND */}
+      {isColorful && (
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-[10%] left-[-10%] w-[50%] h-[50%] bg-pink-100/40 dark:bg-pink-900/10 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] bg-orange-100/40 dark:bg-orange-900/10 blur-[120px] rounded-full" />
+        </div>
+      )}
+
+      <main className="relative z-20 max-w-7xl mx-auto pt-32 pb-40 px-6 md:px-12">
+        
+        {/* HERO SECTIE */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-32">
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <h1 className="text-7xl md:text-[8rem] font-black leading-[0.85] tracking-tighter text-slate-950 dark:text-white mb-8">
+              {HOME_CONFIG.hero.title}<br />
+              <span className={`transition-all duration-700 ${
+                isColorful ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500" : "text-slate-900 dark:text-slate-200"
+              }`}>
+                {HOME_CONFIG.hero.subtitle}
+              </span>
+            </h1>
+            <p className="text-2xl text-slate-600 dark:text-slate-400 max-w-xl font-medium mb-10">
+              {HOME_CONFIG.hero.description}
             </p>
-          </div>
-          
-          <h1 className={`text-5xl md:text-7xl text-indigo-950 dark:text-white tracking-tight leading-[1.1] ${
-            isColorful ? "font-black" : "font-semibold"
-          }`}>
-            Design dat spreekt, <br />
-            <span className={`${
-              isColorful 
-                ? "text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400" 
-                : "text-indigo-600 dark:text-indigo-400"
+            <Link href="/project" className={`inline-block w-fit px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all hover:scale-105 ${
+              isColorful ? "bg-slate-900 text-white shadow-xl shadow-pink-500/20" : "bg-slate-950 dark:bg-white text-white dark:text-slate-950"
             }`}>
-              verhalen die blijven.
-            </span>
-          </h1>
-          
-          <p className={`text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed ${
-            isColorful ? "font-normal" : "font-light"
-          }`}>
-            Ik ben <span className={`text-indigo-950 dark:text-white ${isColorful ? "font-bold" : "font-medium"}`}>Joy Bevers</span>, een ontwerper met een passie voor esthetiek en impact. 
-            Ik vertaal visies naar krachtige beeldtaal door middel van{" "}
-            <span className={`font-medium italic underline underline-offset-4 decoration-2 ${
-              isColorful 
-                ? "text-pink-600 dark:text-cyan-400 decoration-pink-300 dark:decoration-cyan-700" 
-                : "text-indigo-600 dark:text-indigo-400 decoration-indigo-300"
-            }`}>Visual Design</span> en creatieve strategie.
-          </p>
-        </div>
+              Bekijk Portfolio
+            </Link>
+          </div>
 
-        {/* Knoppen */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center">
+          <div className="lg:col-span-5">
+            <div className="relative group overflow-hidden rounded-[40px] shadow-2xl">
+              <img 
+                src={HOME_CONFIG.hero.mainImage} 
+                alt="Main work" 
+                className="w-full h-[500px] lg:h-[650px] object-cover transition-transform duration-700 group-hover:scale-110"
+                onError={(e) => { 
+                  const target = e.target as HTMLImageElement; 
+                  target.src = "https://via.placeholder.com/800x1000?text=Upload+Image+Hier"; 
+                }}
+              />
+            </div>
+          </div>
+        </section>
 
-          {/* ← AANPASSING: verwijst naar projectenpagina */}
-          <Link href="/projects" className={`px-10 py-4 text-white rounded-xl transition-all duration-300 shadow-lg ${
-            isColorful 
-              ? "bg-indigo-950 dark:bg-cyan-400 dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-cyan-300 font-bold" 
-              : "bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 font-medium"
-          }`}>
-            Bekijk Portfolio
-          </Link>
+        {/* PREVIEW VAN WERKEN */}
+        <section className="mb-32">
+          <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter mb-12">Recent Werk</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {HOME_CONFIG.previews.map((proj) => (
+              <Link key={proj.id} href="/project" className="group block">
+                <div className="relative overflow-hidden rounded-[30px] mb-6">
+                  <img 
+                    src={proj.image} 
+                    alt={proj.title} 
+                    className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                    onError={(e) => { 
+                      const target = e.target as HTMLImageElement; 
+                      target.src = "https://via.placeholder.com/600x400?text=Check+Image+Pad"; 
+                    }}
+                  />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">{proj.category}</span>
+                <h4 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">{proj.title}</h4>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-          {/* ← AANPASSING: verwijst naar contactpagina */}
-          <Link href="/contact" className={`px-10 py-4 rounded-xl border-2 transition-all duration-300 shadow-sm ${
-            isColorful 
-              ? "bg-white dark:bg-slate-800/60 text-indigo-950 dark:text-white border-indigo-50 dark:border-slate-700 hover:border-pink-400 dark:hover:border-cyan-400 font-bold" 
-              : "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800 hover:border-indigo-400 font-medium"
-          }`}>
-            Neem Contact Op
-          </Link>
+        {/* DIENSTEN (Behouden) */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className={`p-10 rounded-[40px] border transition-all ${isColorful ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5" : "bg-transparent border-slate-200 dark:border-slate-800"}`}>
+              <div className={`w-10 h-1 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 mb-6`} />
+              <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">Branding</h3>
+              <p className="text-sm text-slate-500 mt-2">Ik bouw visuele fundamenten. Van logo-ontwerp tot volledige brand guides die de essentie van een merk vastleggen en consistent doorvertalen naar elk platform.</p>
+            </div>
+            <div className={`p-10 rounded-[40px] border transition-all ${isColorful ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5" : "bg-transparent border-slate-200 dark:border-slate-800"}`}>
+              <div className={`w-10 h-1 rounded-full bg-gradient-to-r from-violet-600 to-indigo-500 mb-6`} />
+              <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">Design</h3>
+              <p className="text-sm text-slate-500 mt-2">Gedurfd digitaal design dat werkt. Ik ontwerp interfaces (UI) en interacties die niet alleen esthetisch hoogstaand zijn, maar ook een naadloze gebruikerservaring (UX) bieden.</p>
+            </div>
+            <div className={`p-10 rounded-[40px] border transition-all ${isColorful ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5" : "bg-transparent border-slate-200 dark:border-slate-800"}`}>
+              <div className={`w-10 h-1 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 mb-6`} />
+              <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">Concept</h3>
+              <p className="text-sm text-slate-500 mt-2">Elk groot ontwerp begint bij een sterk idee. Ik help bij het vertalen van complexe vraagstukken naar heldere visuele concepten die een boodschap echt laten binnenkomen.</p>
+            </div>
+        </section>
 
-        </div>
-      </div>
-
-      {/* Expertise Sectie */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-24 px-6 md:px-16">
-        
-        {/* Kaart 1 */}
-        <div className={`p-8 rounded-2xl border transition-all duration-300 ${
-          isColorful 
-            ? "bg-white dark:bg-slate-800/40 shadow-lg border-pink-50 dark:border-slate-700 hover:shadow-pink-100/50 dark:hover:border-cyan-400/30" 
-            : "bg-slate-50 dark:bg-slate-800/20 shadow-sm border-slate-100 dark:border-slate-800 hover:shadow-indigo-100/30"
-        }`}>
-          <h2 className={`text-xs uppercase tracking-widest mb-4 italic ${
-            isColorful ? "font-black text-pink-600 dark:text-cyan-400" : "font-semibold text-indigo-500 dark:text-indigo-400"
-          }`}>Dienst</h2>
-          <h3 className={`text-2xl text-indigo-950 dark:text-white mb-3 ${isColorful ? "font-bold" : "font-medium"}`}>Branding</h3>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm font-light">
-            Het bouwen van een tijdloze visuele identiteit die de kern van jouw merk vangt en versterkt.
-          </p>
-        </div>
-        
-        {/* Kaart 2 */}
-        <div className={`p-8 rounded-2xl border transition-all duration-300 ${
-          isColorful 
-            ? "bg-white dark:bg-slate-800/40 shadow-lg border-purple-50 dark:border-slate-700 hover:shadow-purple-100/50 dark:hover:border-blue-400/30" 
-            : "bg-slate-50 dark:bg-slate-800/20 shadow-sm border-slate-100 dark:border-slate-800 hover:shadow-indigo-100/30"
-        }`}>
-          <h2 className={`text-xs uppercase tracking-widest mb-4 italic ${
-            isColorful ? "font-black text-purple-600 dark:text-blue-400" : "font-semibold text-indigo-500 dark:text-indigo-400"
-          }`}>Focus</h2>
-          <h3 className={`text-2xl text-indigo-950 dark:text-white mb-3 ${isColorful ? "font-bold" : "font-medium"}`}>Visual Design</h3>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm font-light">
-            Gespecialiseerd in digitale en fysieke uitingen waarbij compositie en kleur de hoofdrol spelen.
-          </p>
-        </div>
-
-        {/* Kaart 3 */}
-        <div className={`p-8 rounded-2xl border transition-all duration-300 ${
-          isColorful 
-            ? "bg-white dark:bg-slate-800/40 shadow-lg border-orange-50 dark:border-slate-700 hover:shadow-orange-100/50 dark:hover:border-indigo-400/30" 
-            : "bg-slate-50 dark:bg-slate-800/20 shadow-sm border-slate-100 dark:border-slate-800 hover:shadow-indigo-100/30"
-        }`}>
-          <h2 className={`text-xs uppercase tracking-widest mb-4 italic ${
-            isColorful ? "font-black text-orange-600 dark:text-indigo-400" : "font-semibold text-indigo-500 dark:text-indigo-400"
-          }`}>Aanpak</h2>
-          <h3 className={`text-2xl text-indigo-950 dark:text-white mb-3 ${isColorful ? "font-bold" : "font-medium"}`}>Concepting</h3>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm font-light">
-            Strategische creativiteit die verder gaat dan alleen beeld; we leggen het fundament voor je verhaal.
-          </p>
-        </div>
-      </div>
+      </main>
     </div>
   )
 }

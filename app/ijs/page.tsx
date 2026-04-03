@@ -1,201 +1,133 @@
 "use client"
 
+import React from "react"
 import Link from 'next/link'
 import { useStyle } from "@/components/ThemeProvider"
 
-export default function IjsProjectPage() {
-  const { style } = useStyle()
-  const isColorful = style === "colorful"
+const PROJECT_DATA = {
+  title: "Lemon Mint Tea",
+  subtitle: "Brand Design Concept",
+  description: "Voor deze opdracht ontwikkelde ik een visueel symbool voor een nieuwe ijssmaak: Lemon Mint Tea Sorbet. Vanuit het archetype 'Innocent' heb ik gezocht naar een vormtaal die puurheid, frisheid en eenvoud uitstraalt. Het ontwerp weerspiegelt de natuurlijke essentie van de ingrediënten zonder overbodige ruis.e keuze voor de smaak Lemon Mint Tea Sorbet is voortgekomen uit het verlangen naar een fris gevoel, vergelijkbaar met een warme zomerdag. Hierbij sluit het merkarchetype 'Innocent' perfect aan, omdat deze smaak uitnodigt tot dromen over vakantie en puurheid.",
+  mainImage: "/img/mockupijs.png",
+  details: {
+    archetype: "Innocent",
+    category: "Packaging Design",
+    target: "Families & Zomergenieters",
+  },
+  colors: [
+    { color: "#FFD700", name: "Citroengeel" },
+    { color: "#FF8C00", name: "Zonne-oranje" },
+    { color: "#32CD32", name: "Muntgroen" },
+  ],
+  assets: {
+    positive: "/img/logopositief.png",
+    negative: "[Afbeelding Symbool Negatief]" 
+  }
+}
+
+export default function ProjectPage() {
+  const styleContext = useStyle();
+  const isColorful = styleContext ? styleContext.style === "colorful" : true;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 text-indigo-950 dark:text-white font-sans transition-colors duration-500">
-
-      {/* Hero Sectie */}
-      <section className={`py-16 md:py-24 px-6 border-b transition-colors duration-500 ${
-        isColorful
-          ? "bg-fuchsia-50 dark:bg-slate-800/40 border-fuchsia-100 dark:border-slate-700"
-          : "bg-slate-50 dark:bg-slate-800/20 border-slate-100 dark:border-slate-800"
-      }`}>
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className={`text-5xl md:text-7xl tracking-tighter mb-4 italic uppercase text-indigo-950 dark:text-white ${
-            isColorful ? "font-black" : "font-semibold"
-          }`}>
-            Lemon Mint{" "}
-            <span className={isColorful ? "text-fuchsia-500 dark:text-cyan-400" : "text-indigo-500 dark:text-indigo-400"}>
-              Tea
+    <div className={`min-h-screen transition-colors duration-500 ${
+      isColorful ? "bg-white text-slate-900" : "bg-slate-950 text-white"
+    }`}>
+      
+      {/* 1. HERO SECTIE: COMPACT & VERTICAAL */}
+      <section className="pt-24 pb-12 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+          
+          {/* Tekst kant */}
+          <div className="flex-1">
+            <span className={`text-[10px] uppercase tracking-[0.4em] font-black ${isColorful ? "text-fuchsia-500" : "text-indigo-500"}`}>
+              {PROJECT_DATA.subtitle}
             </span>
-          </h1>
-          <p className={`text-xs uppercase tracking-[0.3em] mb-12 ${
-            isColorful
-              ? "font-bold text-fuchsia-400 dark:text-cyan-500"
-              : "font-medium text-indigo-400 dark:text-indigo-500"
-          }`}>
-            Brand Design Concept • Archetype: Innocent
-          </p>
-
-          <div className={`bg-white p-3 rounded-[2.5rem] shadow-2xl overflow-hidden border transition-colors duration-500 ${
-            isColorful
-              ? "shadow-fuchsia-200/50 dark:shadow-slate-900 border-fuchsia-100 dark:border-slate-700"
-              : "shadow-slate-100 dark:shadow-slate-900 border-slate-100 dark:border-slate-800"
-          }`}>
-            <div className="aspect-[4/5] md:aspect-video bg-white flex items-center justify-center text-slate-500 font-medium italic">
-              <img src="/img/ijs.png" alt="Lemon Mint Tea Sorbet verpakking" />
-            </div>
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter mt-2 mb-6 uppercase italic leading-[0.9]">
+              {PROJECT_DATA.title}
+            </h1>
+            <p className="text-lg opacity-70 max-w-md hidden md:block leading-relaxed">
+              {PROJECT_DATA.description}
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* Content Sectie */}
-      <section className="max-w-6xl mx-auto py-20 px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-
-          {/* Linker kolom */}
-          <div className="lg:col-span-7 space-y-8">
-            <div>
-              <h2 className={`text-3xl mb-6 tracking-tight text-indigo-950 dark:text-white ${
-                isColorful ? "font-black" : "font-semibold"
-              }`}>De Merkgedachte</h2>
-              <p className={`text-slate-600 dark:text-slate-400 leading-relaxed text-lg ${
-                isColorful ? "font-normal" : "font-light"
-              }`}>
-                De keuze voor de smaak{" "}
-                <strong className={`text-indigo-950 dark:text-white ${isColorful ? "font-bold" : "font-medium"}`}>
-                  Lemon Mint Tea Sorbet
-                </strong>{" "}
-                is voortgekomen uit het verlangen naar een fris gevoel, vergelijkbaar met een warme zomerdag.
-                Hierbij sluit het merkarchetype{" "}
-                <strong className={`text-indigo-950 dark:text-white ${isColorful ? "font-bold" : "font-medium"}`}>
-                  'Innocent'
-                </strong>{" "}
-                perfect aan, omdat deze smaak uitnodigt tot dromen over vakantie en puurheid.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
-              <div className={`p-6 rounded-3xl border transition-colors duration-500 ${
-                isColorful
-                  ? "bg-fuchsia-50 dark:bg-slate-800/40 border-fuchsia-100 dark:border-slate-700"
-                  : "bg-slate-50 dark:bg-slate-800/20 border-slate-100 dark:border-slate-800"
-              }`}>
-                <h3 className={`uppercase text-xs mb-3 tracking-widest ${
-                  isColorful
-                    ? "font-black text-fuchsia-500 dark:text-cyan-400"
-                    : "font-semibold text-indigo-500 dark:text-indigo-400"
-                }`}>Het Symbool</h3>
-                <p className={`text-sm text-slate-600 dark:text-slate-400 leading-relaxed ${
-                  isColorful ? "font-normal" : "font-light"
-                }`}>
-                  Het logo combineert een halve citroen, die een ondergaande zon voorstelt, met twee muntblaadjes.
-                  Deze blaadjes vormen samen een subtiele snor, een knipoog naar de uitvinder van de thee.
-                </p>
-              </div>
-              <div className={`p-6 rounded-3xl border transition-colors duration-500 ${
-                isColorful
-                  ? "bg-indigo-50 dark:bg-slate-800/40 border-indigo-100 dark:border-slate-700"
-                  : "bg-slate-50 dark:bg-slate-800/20 border-slate-100 dark:border-slate-800"
-              }`}>
-                <h3 className={`uppercase text-xs mb-3 tracking-widest ${
-                  isColorful
-                    ? "font-black text-indigo-500 dark:text-blue-400"
-                    : "font-semibold text-indigo-500 dark:text-indigo-400"
-                }`}>Doelgroep</h3>
-                <p className={`text-sm text-slate-600 dark:text-slate-400 leading-relaxed ${
-                  isColorful ? "font-normal" : "font-light"
-                }`}>
-                  Door de frisse en fruitige smaak is dit concept uitermate geschikt voor{" "}
-                  <strong className={`text-indigo-950 dark:text-white ${isColorful ? "font-bold" : "font-medium"}`}>
-                    families
-                  </strong>{" "}
-                  die samen willen genieten van een zomers moment.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Rechter kolom: Kleuren & Details */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className={`p-8 rounded-[2rem] text-white shadow-xl transition-colors duration-500 ${
-              isColorful
-                ? "bg-indigo-950 dark:bg-slate-800/60 dark:border dark:border-slate-700"
-                : "bg-indigo-600 dark:bg-slate-800/60 dark:border dark:border-slate-700"
+          
+          {/* Afbeelding kant: Verticale focus die op het scherm past */}
+          <div className="w-full max-w-[380px]"> 
+            <div className={`relative aspect-[3/4] rounded-[2.5rem] overflow-hidden border shadow-2xl transition-all duration-700 ${
+              isColorful ? "border-fuchsia-100 shadow-fuchsia-100/20" : "border-slate-800 shadow-black/40"
             }`}>
-              <h3 className={`uppercase tracking-[0.2em] text-[10px] mb-8 ${
-                isColorful ? "font-bold text-fuchsia-300 dark:text-cyan-400" : "font-semibold text-indigo-200 dark:text-indigo-400"
-              }`}>Visueel Palet</h3>
-              <div className="space-y-4">
-                {[
-                  { color: "#FFD700", name: "Citroengeel" },
-                  { color: "#FF8C00", name: "Zonne-oranje" },
-                  { color: "#32CD32", name: "Muntgroen" },
-                ].map((item) => (
-                  <div key={item.color} className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-full border-2 border-white/20" style={{ backgroundColor: item.color }}></div>
-                      <span className={isColorful ? "font-bold" : "font-medium"}>{item.name}</span>
-                    </div>
-                    <span className="text-[10px] text-white/40 font-mono">{item.color}</span>
-                  </div>
-                ))}
-              </div>
+              <img 
+                src={PROJECT_DATA.mainImage} 
+                alt={PROJECT_DATA.title} 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Logo Sectie */}
-      <section className={`py-20 px-6 transition-colors duration-500 ${
-        isColorful
-          ? "bg-slate-50 dark:bg-slate-800/20"
-          : "bg-slate-50/50 dark:bg-slate-800/10"
-      }`}>
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <div className={`aspect-square rounded-3xl border flex items-center justify-center italic transition-colors duration-500 ${
-                isColorful
-                  ? "bg-white dark:bg-slate-800/40 border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500"
-                  : "bg-white dark:bg-slate-800/20 border-slate-100 dark:border-slate-800 text-slate-300 dark:text-slate-600"
-              }`}>
-                [Afbeelding Symbool Positief]
-              </div>
-              <p className={`text-center text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500 ${
-                isColorful ? "font-bold" : "font-medium"
-              }`}>Symbool Positief</p>
-            </div>
-            <div className="space-y-4">
-              <div className={`aspect-square rounded-3xl border flex items-center justify-center italic transition-colors duration-500 ${
-                isColorful
-                  ? "bg-indigo-950 dark:bg-slate-900 dark:border-slate-700 text-white/20"
-                  : "bg-indigo-600 dark:bg-slate-900 dark:border-slate-800 text-white/20"
-              }`}>
-                [Afbeelding Symbool Negatief]
-              </div>
-              <p className={`text-center text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500 ${
-                isColorful ? "font-bold" : "font-medium"
-              }`}>Symbool Negatief</p>
-            </div>
+      {/* 2. INFO SECTIE: QUICK FACTS */}
+      <section className={`py-16 px-6 ${isColorful ? "bg-slate-50" : "bg-slate-900/50"}`}>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div className="lg:col-span-7">
+            <h2 className="text-2xl font-black mb-4 tracking-tight">De Merkgedachte</h2>
+            <p className="text-lg opacity-70 font-light italic">
+              "Vertaald naar een fris gevoel van een warme zomerdag."
+            </p>
+          </div>
+          <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+             <div className="p-4 rounded-2xl border border-black/5 dark:border-white/5">
+                <p className="text-[10px] uppercase font-bold opacity-40">Archetype</p>
+                <p className="font-bold">{PROJECT_DATA.details.archetype}</p>
+             </div>
+             <div className="p-4 rounded-2xl border border-black/5 dark:border-white/5">
+                <p className="text-[10px] uppercase font-bold opacity-40">Doelgroep</p>
+                <p className="font-bold">{PROJECT_DATA.details.target}</p>
+             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer navigatie */}
-      <footer className={`py-20 text-center border-t transition-colors duration-500 ${
-        isColorful
-          ? "border-fuchsia-100 dark:border-slate-700"
-          : "border-slate-100 dark:border-slate-800"
-      }`}>
-        <Link
-          href="/projects"
-          className={`inline-flex items-center space-x-3 uppercase text-xs tracking-widest transition-colors ${
-            isColorful
-              ? "font-bold text-indigo-950 dark:text-slate-300 hover:text-fuchsia-600 dark:hover:text-cyan-400"
-              : "font-medium text-indigo-500 dark:text-indigo-400 hover:text-indigo-950 dark:hover:text-white"
-          }`}
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          <span>Terug naar alle projecten</span>
+      {/* 3. DETAILS SECTIE: KLEUREN & LOGO'S COMPACT */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+          
+          {/* Kleurenpalet */}
+          <div className={`p-8 rounded-[2.5rem] ${isColorful ? "bg-indigo-950 text-white" : "bg-slate-900"}`}>
+            <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold mb-8 opacity-60">Visueel Palet</h3>
+            <div className="flex flex-wrap gap-6">
+              {PROJECT_DATA.colors.map((item) => (
+                <div key={item.color} className="flex flex-col items-center gap-2">
+                  <div className="w-14 h-14 rounded-full border-2 border-white/10" style={{ backgroundColor: item.color }} />
+                  <p className="text-[10px] font-bold opacity-70">{item.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Logo's kleiner en naast elkaar */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col gap-2">
+              <div className="aspect-square rounded-[2rem] bg-white border border-slate-100 flex items-center justify-center p-10">
+                <img src={PROJECT_DATA.assets.positive} alt="Logo" className="max-w-full h-auto object-contain" />
+              </div>
+              <p className="text-[9px] text-center uppercase font-bold opacity-30">Positief</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="aspect-square rounded-[2rem] bg-slate-900 flex items-center justify-center p-10 text-[10px] text-white/20 italic">
+                {PROJECT_DATA.assets.negative.startsWith('/') ? <img src={PROJECT_DATA.assets.negative} alt="Logo" className="max-w-full h-auto object-contain" /> : "Negatief"}
+              </div>
+              <p className="text-[9px] text-center uppercase font-bold opacity-30">Negatief</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="py-16 text-center border-t border-black/5 dark:border-white/5">
+        <Link href="/project" className="text-[10px] font-black uppercase tracking-[0.3em] hover:opacity-50 transition-all">
+          ← Terug naar alle projecten
         </Link>
       </footer>
     </div>

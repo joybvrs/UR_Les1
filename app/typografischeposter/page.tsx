@@ -30,7 +30,7 @@ export default function TypografischeposterProjectPage() {
               ? "font-bold text-red-400 dark:text-yellow-500"
               : "font-medium text-indigo-400 dark:text-indigo-500"
           }`}>
-            Brand Design Concept • Verpakkingsontwerp
+            Poster design • quote van Paul Klee
           </p>
 
           <div className={`bg-white p-3 rounded-[2.5rem] shadow-2xl overflow-hidden border transition-colors duration-500 ${
@@ -54,16 +54,11 @@ export default function TypografischeposterProjectPage() {
             <div>
               <h2 className={`text-3xl mb-6 tracking-tight text-indigo-950 dark:text-white ${
                 isColorful ? "font-black" : "font-semibold"
-              }`}>De Merkgedachte</h2>
+              }`}>Over het ontwerp</h2>
               <p className={`text-slate-600 dark:text-slate-400 leading-relaxed text-lg ${
                 isColorful ? "font-normal" : "font-light"
               }`}>
-                Dit project is een herontwerp van de iconische{" "}
-                <strong className={`text-indigo-950 dark:text-white ${isColorful ? "font-bold" : "font-medium"}`}>
-                  Kellogg's verpakking
-                </strong>{" "}
-                met een moderne kijk op het klassieke merk. Het ontwerp behoudt de herkenbaarheid
-                van het origineel, maar ademt een frisse en hedendaagse uitstraling.
+                 In dit project staat de kracht van het woord centraal. Aan de hand van een gekozen quote heb ik een typografische poster ontworpen waarbij de letters niet alleen tekst zijn, maar zelf het beeld vormen. De vormgeving versterkt de emotionele lading van de quote door te spelen met schaal, ritme en contrast.
               </p>
             </div>
 
@@ -120,10 +115,11 @@ export default function TypografischeposterProjectPage() {
               }`}>Visueel Palet</h3>
               <div className="space-y-4">
                 {[
-                  { color: "#E3001B", name: "Kellogg's Rood" },
-                  { color: "#FFD700", name: "Zonnegeel" },
-                  { color: "#FF6B00", name: "Warm Oranje" },
-                  { color: "#FFFFFF", name: "Zuiver Wit" },
+                  { color: "#EBD9B4", name: "Paper Beige" },
+                  { color: "#9C3D2D", name: "Terracotta rood" },
+                  { color: "#4A6245", name: "Forest green" },
+                  { color: "#5577A3", name: "Muted Blue" },
+                  { color: "#DDA345", name: "Ochre Yellow" },
                 ].map((item) => (
                   <div key={item.color} className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
