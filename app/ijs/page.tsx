@@ -7,8 +7,11 @@ import { useStyle } from "@/components/ThemeProvider"
 const PROJECT_DATA = {
   title: "Lemon Mint Tea",
   subtitle: "Brand Design Concept",
-  description: "Voor deze opdracht ontwikkelde ik een visueel symbool voor een nieuwe ijssmaak: Lemon Mint Tea Sorbet. Vanuit het archetype 'Innocent' heb ik gezocht naar een vormtaal die puurheid, frisheid en eenvoud uitstraalt. Het ontwerp weerspiegelt de natuurlijke essentie van de ingrediënten zonder overbodige ruis.e keuze voor de smaak Lemon Mint Tea Sorbet is voortgekomen uit het verlangen naar een fris gevoel, vergelijkbaar met een warme zomerdag. Hierbij sluit het merkarchetype 'Innocent' perfect aan, omdat deze smaak uitnodigt tot dromen over vakantie en puurheid.",
-  mainImage: "/img/mockupijs.png",
+  description: "Voor deze opdracht ontwikkelde ik een visueel symbool voor een nieuwe ijssmaak: Lemon Mint Tea Sorbet. Vanuit het archetype 'Innocent' heb ik gezocht naar een vormtaal die puurheid, frisheid en eenvoud uitstraalt. Het ontwerp weerspiegelt de natuurlijke essentie van de ingrediënten zonder overbodige ruis. De keuze voor de smaak Lemon Mint Tea Sorbet is voortgekomen uit het verlangen naar een fris gevoel, vergelijkbaar met een warme zomerdag. Hierbij sluit het merkarchetype 'Innocent' perfect aan, omdat deze smaak uitnodigt tot dromen over vakantie en puurheid.",
+  
+  // AANGEPAST: De link verwijst nu naar de .jpg versie
+  mainImage: "/img/mockupijs.jpg", 
+  
   details: {
     archetype: "Innocent",
     category: "Packaging Design",
@@ -21,7 +24,8 @@ const PROJECT_DATA = {
   ],
   assets: {
     positive: "/img/logopositief.png",
-    negative: "[Afbeelding Symbool Negatief]" 
+    // Tip: Zorg dat dit bestand ook in je /img map staat op GitHub
+    negative: "/img/logonegatief.png" 
   }
 }
 
@@ -34,11 +38,10 @@ export default function ProjectPage() {
       isColorful ? "bg-white text-slate-900" : "bg-slate-950 text-white"
     }`}>
       
-      {/* 1. HERO SECTIE: COMPACT & VERTICAAL */}
+      {/* 1. HERO SECTIE */}
       <section className="pt-24 pb-12 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
           
-          {/* Tekst kant */}
           <div className="flex-1">
             <span className={`text-[10px] uppercase tracking-[0.4em] font-black ${isColorful ? "text-fuchsia-500" : "text-indigo-500"}`}>
               {PROJECT_DATA.subtitle}
@@ -51,7 +54,6 @@ export default function ProjectPage() {
             </p>
           </div>
           
-          {/* Afbeelding kant: Verticale focus die op het scherm past */}
           <div className="w-full max-w-[380px]"> 
             <div className={`relative aspect-[3/4] rounded-[2.5rem] overflow-hidden border shadow-2xl transition-all duration-700 ${
               isColorful ? "border-fuchsia-100 shadow-fuchsia-100/20" : "border-slate-800 shadow-black/40"
@@ -66,7 +68,7 @@ export default function ProjectPage() {
         </div>
       </section>
 
-      {/* 2. INFO SECTIE: QUICK FACTS */}
+      {/* 2. INFO SECTIE */}
       <section className={`py-16 px-6 ${isColorful ? "bg-slate-50" : "bg-slate-900/50"}`}>
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-7">
@@ -88,11 +90,10 @@ export default function ProjectPage() {
         </div>
       </section>
 
-      {/* 3. DETAILS SECTIE: KLEUREN & LOGO'S COMPACT */}
+      {/* 3. DETAILS SECTIE */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
           
-          {/* Kleurenpalet */}
           <div className={`p-8 rounded-[2.5rem] ${isColorful ? "bg-indigo-950 text-white" : "bg-slate-900"}`}>
             <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold mb-8 opacity-60">Visueel Palet</h3>
             <div className="flex flex-wrap gap-6">
@@ -105,7 +106,6 @@ export default function ProjectPage() {
             </div>
           </div>
 
-          {/* Logo's kleiner en naast elkaar */}
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
               <div className="aspect-square rounded-[2rem] bg-white border border-slate-100 flex items-center justify-center p-10">
@@ -124,7 +124,6 @@ export default function ProjectPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="py-16 text-center border-t border-black/5 dark:border-white/5">
         <Link href="/project" className="text-[10px] font-black uppercase tracking-[0.3em] hover:opacity-50 transition-all">
           ← Terug naar alle projecten

@@ -13,13 +13,13 @@ interface Project {
 }
 
 const PROJECTS_DATA: Project[] = [
-  { name: "Ijs", slug: "ijs", category: "Branding", description: "Een verfrissend merkconcept voor ambachtelijk ijs.", image: "/img/mockupijs.png" },
+  { name: "Ijs", slug: "ijs", category: "Branding", description: "Een verfrissend merkconcept voor ambachtelijk ijs.", image: "/img/mockupijs.jpg" },
   { name: "Ember", slug: "ember", category: "Identiteit", description: "Visuele identiteit voor een modern interieurlabel.", image: "/img/magazine.png" },
   { name: "Cinecity", slug: "cinecity", category: "UX/UI Design", description: "User experience design voor een bioscoopplatform.", image: "/img/cinecity.jpg" },
   { name: "Kelloggs", slug: "kelloggs", category: "Packaging", description: "Nieuwe branding voor lekkere cornflakes.", image: "/img/kelloggsdoos.jpg" },
   { name: "Leporello", slug: "leporello", category: "Print", description: "Tribute to Stefan Vanfleteren.", image: "/img/leporello.jpg" },
   { name: "Typografische poster", slug: "typografischeposter", category: "Poster Design", description: "Typografisch poster design.", image: "/img/poster.jpg" },
-  { name: "Portfolio in data", slug: "data", category: "Web Design", description: "Webdesign met data verwerkt.", image: "/img/data.png" },
+  { name: "Portfolio in data", slug: "data", category: "Web Design", description: "Webdesign met data verwerkt.", image: "/img/data.jpg" },
   { name: "Sneaker", slug: "sneaker", category: "Promotie", description: "Visuele promotie sneaker.", image: "/img/nike.jpg" },
 ];
 
