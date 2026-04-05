@@ -1,0 +1,51 @@
+import { AppToaster } from "@/components/ui/toast"
+import GlobalNavbar from "@/components/GlobalNavbar"
+import Footer from "@/components/Footer"
+import { StyleProvider } from "@/components/ThemeProvider"
+import SurveyPopup from "@/components/surveypopup"
+import Script from "next/script"
+import GoogleAnalyticsTracker from "@/components/GoogleAnalyticsTracker"
+import "./globals.css"
+
+export const metadata = {
+  title: "JOY. - Portfolio",
+  description: "Graphic & Visual Design Portfolio",
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="nl" suppressHydrationWarning>
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+      </head>
+
+      <body className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-500">
+        <GoogleAnalyticsTracker />
+        <StyleProvider>
+          <GlobalNavbar />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+          <AppToaster />
+          <SurveyPopup />
+        </StyleProvider>
+      </body>
+    </html>
+  )
+}
