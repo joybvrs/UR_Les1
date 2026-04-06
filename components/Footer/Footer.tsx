@@ -10,8 +10,8 @@ export default function Footer() {
   return (
     <footer className={`w-full py-16 px-6 md:px-12 transition-all duration-700 border-t ${
       isColorful 
-        ? "bg-[#FF5C00] border-orange-500 text-white" 
-        : "bg-slate-950 dark:bg-black border-slate-800 text-white"
+      ? "bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400 border-pink-400/50 text-white"
+              : "bg-slate-950 dark:bg-black border-slate-800 text-white"
     }`}>
       
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">

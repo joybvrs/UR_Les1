@@ -1,51 +1,117 @@
-// pages/cookie-settings.js
+"use client"
+import Link from "next/link"
+import { useStyle } from "@/components/ThemeProvider"
+
 export default function CookieSettings() {
+  const styleContext = useStyle()
+  const isColorful = styleContext?.style === "colorful"
+
+  const cookies = [
+    {
+      title: "Essential Cookies",
+      text: `These cookies are necessary for the website to function and cannot be turned off. They ensure basic functionalities such as page navigation, security, and access to secure areas of the site.`
+    },
+    {
+      title: "Performance & Analytics Cookies",
+      text: `These cookies help us understand how visitors interact with our website, allowing us to improve performance and provide a better user experience.`
+    },
+    {
+      title: "Functional Cookies",
+      text: `Functional cookies enable enhanced features and personalization, such as remembering your preferences or login information.`
+    },
+    {
+      title: "Advertising & Targeting Cookies",
+      text: `These cookies are used to deliver relevant advertisements based on your interests and browsing behavior. They may also limit the number of times you see an ad and help measure ad campaign effectiveness.`
+    },
+  ]
+
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Cookie Settings</h1>
-     
-      <div className="space-y-6">
+    <div className={`w-full min-h-screen transition-all duration-700 ${
+      isColorful ? "bg-[#fafafa] dark:bg-[#050505]" : "bg-white dark:bg-slate-950"
+    }`}>
 
-        <p className="mb-6 text-gray-600">
-          We use cookies to enhance your experience on our website, analyze site traffic, and provide personalized content. Some cookies are essential for the site to function, while others help us improve your experience.
-        </p>
+      {/* HEADER */}
+      <section className="relative pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto">
+        <div className="flex flex-col items-start gap-4">
+          <span className={`text-[10px] font-black uppercase tracking-[0.4em] px-3 py-1.5 rounded-full border ${
+            isColorful ? "border-pink-500 text-pink-600 dark:text-pink-400" : "border-slate-300 dark:border-slate-700 text-slate-500"
+          }`}>
+            Juridisch
+          </span>
+          <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-950 dark:text-white">
+            COOKIE <br />
+            <span className={`transition-all duration-700 ${
+              isColorful ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400" : "text-slate-900 dark:text-slate-200"
+            }`}>SETTINGS.</span>
+          </h1>
+          <p className="text-slate-500 dark:text-slate-400 max-w-xl text-sm font-medium leading-relaxed mt-2">
+            We use cookies to enhance your experience on our website, analyze site traffic, and provide personalized content. Some cookies are essential for the site to function, while others help us improve your experience.
+          </p>
+        </div>
+      </section>
 
-          <div className="p-4 bg-white rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Essential Cookies</h2>
-            <p className="text-gray-600">
-              These cookies are necessary for the website to function and cannot be turned off. They ensure basic functionalities such as page navigation, security, and access to secure areas of the site.
-            </p>
-          </div>
-
-          <div className="p-4 bg-white rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Performance & Analytics Cookies</h2>
-            <p className="text-gray-600">
-              These cookies help us understand how visitors interact with our website, allowing us to improve performance and provide a better user experience.
-            </p>
-          </div>
-
-          <div className="p-4 bg-white rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Functional Cookies</h2>
-            <p className="text-gray-600">
-              Functional cookies enable enhanced features and personalization, such as remembering your preferences or login information.
-            </p>
-          </div>
-
-          <div className="p-4 bg-white rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Advertising & Targeting Cookies</h2>
-            <p className="text-gray-600">
-              These cookies are used to deliver relevant advertisements based on your interests and browsing behavior. They may also limit the number of times you see an ad and help measure ad campaign effectiveness.
-            </p>
-          </div>
-
+      {/* CONTENT */}
+      <main className="max-w-7xl mx-auto px-6 md:px-12 pb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {cookies.map((cookie, index) => (
+            <div key={index} className={`rounded-[24px] p-8 border transition-all duration-300 ${
+              isColorful 
+                ? "bg-white dark:bg-white/5 border-pink-100 dark:border-white/10 hover:border-pink-300 dark:hover:border-pink-500/30" 
+                : "bg-slate-50 dark:bg-white/5 border-slate-100 dark:border-white/10 hover:border-slate-300"
+            }`}>
+              <div className="flex items-center gap-3 mb-4">
+                <span className={`text-[9px] font-black uppercase tracking-widest ${
+                  isColorful ? "text-pink-500" : "text-slate-400"
+                }`}>
+                  0{index + 1}
+                </span>
+                <div className={`flex-grow h-[1px] ${
+                  isColorful ? "bg-pink-100 dark:bg-white/10" : "bg-slate-200 dark:bg-white/10"
+                }`} />
+              </div>
+              <h2 className="text-xl font-black tracking-tighter text-slate-950 dark:text-white mb-3">
+                {cookie.title}
+              </h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                {cookie.text}
+              </p>
+            </div>
+          ))}
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-4">
-          <button className="flex-1 bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition">Accept All</button>
-          <button className="flex-1 bg-gray-200 text-gray-800 font-semibold py-3 rounded-lg hover:bg-gray-300 transition">Reject Non-Essential</button>
-          <button className="flex-1 bg-yellow-500 text-white font-semibold py-3 rounded-lg hover:bg-yellow-600 transition">Customize Settings</button>
+        {/* BUTTONS */}
+        <div className="mt-12 flex flex-col sm:flex-row gap-4 max-w-2xl">
+          <button className={`flex-1 py-4 rounded-full text-[10px] font-black uppercase tracking-widest text-white transition-all hover:scale-105 ${
+            isColorful 
+              ? "bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400 shadow-lg shadow-pink-200 dark:shadow-pink-900/30" 
+              : "bg-slate-950 dark:bg-white dark:text-slate-950"
+          }`}>
+            Accept All
+          </button>
+          <button className={`flex-1 py-4 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 border ${
+            isColorful 
+              ? "border-pink-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-pink-400" 
+              : "border-slate-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-slate-400"
+          }`}>
+            Reject Non-Essential
+          </button>
+          <button className={`flex-1 py-4 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 border ${
+            isColorful 
+              ? "border-pink-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-pink-400" 
+              : "border-slate-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-slate-400"
+          }`}>
+            Customize
+          </button>
         </div>
+      </main>
+
+      <footer className="py-20 text-center border-t border-slate-100 dark:border-white/5">
+        <Link href="/" className={`text-sm font-black uppercase tracking-[0.3em] ${
+          isColorful ? "text-pink-500 hover:text-violet-600" : "text-slate-400 hover:text-slate-950 dark:hover:text-white"
+        }`}>
+          ← Terug naar Home
+        </Link>
+      </footer>
     </div>
-
   )
 }

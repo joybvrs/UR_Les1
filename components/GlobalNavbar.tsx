@@ -51,8 +51,7 @@ export default function GlobalNavbar() {
         isMenuOpen 
           ? "bg-transparent py-4" 
           : (isColorful 
-              ? "bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl py-3 border-b border-indigo-100 dark:border-indigo-500/10" 
-              : "bg-white/40 dark:bg-black/10 backdrop-blur-md py-3 shadow-sm")
+            ? "bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400 backdrop-blur-xl py-3 border-b border-pink-400/50"              : "bg-white/40 dark:bg-black/10 backdrop-blur-md py-3 shadow-sm")
       }`}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between">
           
@@ -88,7 +87,7 @@ export default function GlobalNavbar() {
               </button>
             </div>
 
-            {/* VERBETERDE MENU KNOP MET TEKST */}
+            {/* MENU KNOP */}
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)} 
               className="ml-1 flex items-center gap-2 group"
