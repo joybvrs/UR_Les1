@@ -64,16 +64,11 @@ export default function SneakerProjectPage() {
             <div>
               <h2 className={`text-3xl mb-6 tracking-tight text-indigo-950 dark:text-white ${
                 isColorful ? "font-black" : "font-semibold"
-              }`}>De Merkgedachte</h2>
+              }`}>Over het ontwerp</h2>
               <p className={`text-slate-600 dark:text-slate-400 leading-relaxed text-lg ${
                 isColorful ? "font-normal" : "font-light"
               }`}>
-                Dit project is een herontwerp van de iconische{" "}
-                <strong className={`text-indigo-950 dark:text-white ${isColorful ? "font-bold" : "font-medium"}`}>
-                  Kellogg's verpakking
-                </strong>{" "}
-                met een moderne kijk op het klassieke merk. Het ontwerp behoudt de herkenbaarheid
-                van het origineel, maar ademt een frisse en hedendaagse uitstraling.
+                Voor de Nike AF1 Fontanka 'Summit White/Hyper Pink' creëerde ik een promovideo met een surrealistisch narratief. 
               </p>
             </div>
 
@@ -91,8 +86,7 @@ export default function SneakerProjectPage() {
                 <p className={`text-sm text-slate-600 dark:text-slate-400 leading-relaxed ${
                   isColorful ? "font-normal" : "font-light"
                 }`}>
-                  Het ontwerp speelt met de krachtige rode kleur van Kellogg's als basis,
-                  aangevuld met warme gele en oranje accenten die energie en ochtendoptimisme uitstralen.
+                 Het verhaal volgt een ontwaken waarbij een mysterieus geluid uit een schoenendoos de hoofdpersoon naar een andere wereld transporteert een levendig feestje waar de energie van de sneaker tot leven komt.
                 </p>
               </div>
               <div className={`p-6 rounded-3xl border transition-colors duration-500 ${
@@ -108,11 +102,8 @@ export default function SneakerProjectPage() {
                 <p className={`text-sm text-slate-600 dark:text-slate-400 leading-relaxed ${
                   isColorful ? "font-normal" : "font-light"
                 }`}>
-                  Het concept richt zich op{" "}
-                  <strong className={`text-indigo-950 dark:text-white ${isColorful ? "font-bold" : "font-medium"}`}>
-                    gezinnen en jonge volwassenen
-                  </strong>{" "}
-                  die op zoek zijn naar een vertrouwd maar vernieuwd ontbijtproduct.
+                 Jongeren
+                 
                 </p>
               </div>
             </div>
@@ -130,10 +121,11 @@ export default function SneakerProjectPage() {
               }`}>Visueel Palet</h3>
               <div className="space-y-4">
                 {[
-                  { color: "#E3001B", name: "Kellogg's Rood" },
-                  { color: "#FFD700", name: "Zonnegeel" },
-                  { color: "#FF6B00", name: "Warm Oranje" },
-                  { color: "#FFFFFF", name: "Zuiver Wit" },
+                  { color: "#F1641E", name: "Vivid Orange" },
+                  { color: "#FFB845", name: "Sunset Yellow" },
+                  { color: "#E91E63", name: "Fuchsia" },
+                  { color: "#F8BBD0", name: "Soft Pink" },
+                  { color: "#FFFFFF", name: "Pure White" },
                 ].map((item) => (
                   <div key={item.color} className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">

@@ -60,10 +60,9 @@ export default function KellogsProjectPage() {
               }`}>
                 Dit project is een herontwerp van de iconische{" "}
                 <strong className={`text-indigo-950 dark:text-white ${isColorful ? "font-bold" : "font-medium"}`}>
-                  Kellogg's verpakking
+                  Kellogg's verpakking.
                 </strong>{" "}
-                met een moderne kijk op het klassieke merk. Het ontwerp behoudt de herkenbaarheid
-                van het origineel, maar ademt een frisse en hedendaagse uitstraling.
+                Met Tommie’z heb ik Kellogg’s een verrassende Nederlandse twist gegeven door de smaken van tompouce en stroopwafel te combineren. Om uit mijn comfortzone te stappen, koos ik voor het archetype 'Jester'. Dit resulteerde in een speels en rebels ontwerp dat breekt met de traditionele ontbijtcodes.
               </p>
             </div>
 
@@ -120,10 +119,10 @@ export default function KellogsProjectPage() {
               }`}>Visueel Palet</h3>
               <div className="space-y-4">
                 {[
-                  { color: "#E3001B", name: "Kellogg's Rood" },
-                  { color: "#FFD700", name: "Zonnegeel" },
-                  { color: "#FF6B00", name: "Warm Oranje" },
-                  { color: "#FFFFFF", name: "Zuiver Wit" },
+                  { color: "#FAED79", name: "Geel" },
+                  { color: "#F8B5C0", name: "Tompouce roze" },
+                  { color: "#D61F80", name: "Magenta" },
+                  { color: "#B54030", name: "Terracotta" },
                 ].map((item) => (
                   <div key={item.color} className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
