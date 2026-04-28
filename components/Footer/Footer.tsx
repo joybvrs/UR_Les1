@@ -22,7 +22,7 @@ export default function Footer() {
           
           <nav className="flex gap-8 text-xs font-black uppercase tracking-[0.2em]">
             <Link href="/project" className="hover:opacity-60 transition-all hover:scale-105">Projecten</Link>
-            <Link href="/about" className="hover:opacity-60 transition-all hover:scale-105">About</Link>
+            <Link href="/over mij" className="hover:opacity-60 transition-all hover:scale-105">Over mij</Link>
             <Link href="/contact" className="hover:opacity-60 transition-all hover:scale-105">Contact</Link>
           </nav>
         </div>

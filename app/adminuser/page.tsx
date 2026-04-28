@@ -42,7 +42,7 @@ export default function AdminUserPage() {
     if (confirm("Weet je zeker dat je jouw account wilt verwijderen? Dit kan niet ongedaan worden gemaakt.")) {
       localStorage.removeItem('user-settings');
       alert("Account verwijderd.");
-      window.location.href = "/"; // Terug naar home
+      window.location.href = "/"; // Terug naar 
     }
   };
 

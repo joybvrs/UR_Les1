@@ -1,127 +1,392 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useStyle } from "@/components/ThemeProvider"
+
+type Survey = {
+  id: string
+  label: string
+  description: string
+  url: string
+}
+
+const SURVEYS: Survey[] = [
+  {
+    id: "portfolio",
+    label: "Evaluatie van mijn portfolio",
+    description: "Jouw algemene mening over mijn website",
+    url: "https://docs.google.com/forms/d/e/1FAIpQLSfDeFxnEZiLfrXYXqeUbC6bfqYHwLNv01s0OAzmMy2jevy0yA/viewform?embedded=true",
+  },
+  {
+    id: "navigatie",
+    label: "Navigatie van mijn portfolio",
+    description: "Vind jij alles makkelijk terug?",
+    url: "https://docs.google.com/forms/d/e/1FAIpQLSd09Av10RnCfssRfeRqFEwBP2nVVVmBLa7fMlWTwE5CNVsIXw/viewform?embedded=true",
+  },
+]
+
+function CloseIcon() {
+  return (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  )
+}
+
+function ChevronLeft() {
+  return (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+    </svg>
+  )
+}
+
+function MinimizeIcon() {
+  return (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  )
+}
+
+function CheckIcon() {
+  return (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+    </svg>
+  )
+}
+
+function SurveyChoice({
+  surveys,
+  completed,
+  onSelect,
+  onDismiss,
+  onMinimize,
+  isColorful,
+}: {
+  surveys: Survey[]
+  completed: string[]
+  onSelect: (id: string) => void
+  onDismiss: () => void
+  onMinimize: () => void
+  isColorful: boolean
+}) {
+  const allDone = completed.length === surveys.length
+
+  return (
+    <div className="flex flex-col h-full">
+      {/* Gekleurde topbalk */}
+      <div className={`h-2 w-full flex-shrink-0 ${
+        isColorful
+          ? "bg-gradient-to-r from-pink-500 via-pink-400 to-orange-400"
+          : "bg-slate-900 dark:bg-white"
+      }`} />
+
+      {/* Header */}
+      <div className="p-8 pb-6 border-b border-slate-100 dark:border-slate-800">
+        <div className="flex items-start justify-between">
+          <div>
+            <p className={`text-[10px] font-black uppercase tracking-[0.3em] mb-3 ${
+              isColorful ? "text-pink-500" : "text-slate-400"
+            }`}>
+              Jouw mening
+            </p>
+            <h2 className="text-3xl font-black tracking-tighter text-slate-900 dark:text-white leading-tight">
+              {allDone ? "Bedankt! 🎉" : "Wat vind jij\nvan mijn werk?"}
+            </h2>
+            {!allDone && (
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">
+                Ik ben{" "}
+                <span className="font-black text-slate-900 dark:text-white">Joy Bevers</span>
+                , grafisch & visual designer. Het duurt slechts 2 minuutjes!
+              </p>
+            )}
+            {allDone && (
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-3">
+                Je hebt beide enquêtes ingevuld. Ik waardeer je tijd enorm!
+              </p>
+            )}
+          </div>
+          <div className="flex items-center gap-1 ml-4 flex-shrink-0">
+            <button
+              onClick={onMinimize}
+              className="w-9 h-9 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              <MinimizeIcon />
+            </button>
+            <button
+              onClick={onDismiss}
+              className="w-9 h-9 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              <CloseIcon />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Survey knoppen */}
+      <div className="flex-1 overflow-y-auto p-8 pt-6 flex flex-col gap-4">
+        {surveys.map((survey, i) => {
+          const done = completed.includes(survey.id)
+          const gradients = [
+            "from-pink-500 to-orange-400",
+            "from-violet-600 to-indigo-500",
+          ]
+          return (
+            <button
+              key={survey.id}
+              onClick={() => { if (!done) onSelect(survey.id) }}
+              disabled={done}
+              className={`relative overflow-hidden flex items-center gap-5 p-6 rounded-[24px] text-left w-full transition-all duration-300 group ${
+                done
+                  ? "opacity-50 cursor-default bg-slate-50 dark:bg-slate-800/50"
+                  : isColorful
+                    ? "bg-white dark:bg-white/5 hover:scale-[1.02] shadow-sm hover:shadow-md border border-slate-100 dark:border-white/10"
+                    : "bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
+              }`}
+            >
+              {/* Kleurlijn links */}
+              {!done && isColorful && (
+                <div className={`absolute left-0 top-0 h-full w-1 rounded-l-[24px] bg-gradient-to-b ${gradients[i]}`} />
+              )}
+
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${
+                done
+                  ? "bg-emerald-100 dark:bg-emerald-900/30"
+                  : isColorful
+                    ? `bg-gradient-to-br ${gradients[i]}`
+                    : "bg-slate-900 dark:bg-white"
+              }`}>
+                {done ? (
+                  <span className="text-emerald-500"><CheckIcon /></span>
+                ) : (
+                  <span className="text-white dark:text-slate-900 text-lg font-black">{i + 1}</span>
+                )}
+              </div>
+
+              <div className="flex-1">
+                <p className="text-base font-black tracking-tighter text-slate-900 dark:text-white">
+                  {survey.label}
+                </p>
+                <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 font-medium">
+                  {done ? "Ingevuld — bedankt!" : survey.description}
+                </p>
+              </div>
+
+              {!done && (
+                <span className={`text-slate-300 group-hover:translate-x-1 transition-transform duration-200 ${
+                  isColorful ? "group-hover:text-pink-400" : "group-hover:text-slate-900 dark:group-hover:text-white"
+                }`}>
+                  →
+                </span>
+              )}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Footer */}
+      <div className="p-8 pt-0">
+        {allDone ? (
+          <button
+            onClick={onDismiss}
+            className={`w-full py-4 px-6 rounded-2xl text-sm font-black uppercase tracking-[0.15em] transition-all hover:scale-105 ${
+              isColorful
+                ? "bg-gradient-to-r from-pink-500 to-orange-400 text-white shadow-lg shadow-pink-500/20"
+                : "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
+            }`}
+          >
+            Sluiten
+          </button>
+        ) : (
+          <button
+            onClick={onDismiss}
+            className="w-full py-4 px-6 rounded-2xl text-sm font-black uppercase tracking-[0.15em] border-2 border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:border-slate-300 transition-all"
+          >
+            Misschien later
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function SurveyEmbed({
+  survey,
+  onBack,
+  onDone,
+  onDismiss,
+  onMinimize,
+  isColorful,
+}: {
+  survey: Survey
+  onBack: () => void
+  onDone: () => void
+  onDismiss: () => void
+  onMinimize: () => void
+  isColorful: boolean
+}) {
+  return (
+    <div className="flex flex-col h-full">
+      {/* Gekleurde topbalk */}
+      <div className={`h-2 w-full flex-shrink-0 ${
+        isColorful
+          ? "bg-gradient-to-r from-pink-500 via-pink-400 to-orange-400"
+          : "bg-slate-900 dark:bg-white"
+      }`} />
+
+      {/* Header */}
+      <div className="flex items-center gap-4 px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex-shrink-0">
+        <button
+          onClick={onBack}
+          className={`flex items-center gap-2 text-sm font-black uppercase tracking-wider transition-colors ${
+            isColorful
+              ? "text-slate-400 hover:text-pink-500"
+              : "text-slate-400 hover:text-slate-900 dark:hover:text-white"
+          }`}
+        >
+          <ChevronLeft />
+          Terug
+        </button>
+        <span className="text-sm font-black tracking-tighter text-slate-900 dark:text-white truncate">
+          {survey.label}
+        </span>
+        <div className="ml-auto flex items-center gap-1 flex-shrink-0">
+          <button
+            onClick={onMinimize}
+            className="w-9 h-9 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            <MinimizeIcon />
+          </button>
+          <button
+            onClick={onDismiss}
+            className="w-9 h-9 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            <CloseIcon />
+          </button>
+        </div>
+      </div>
+
+      {/* iframe */}
+      <div className="flex-1 overflow-hidden">
+        <iframe
+          src={survey.url}
+          className="w-full h-full border-0"
+          title={survey.label}
+        >
+          Laden…
+        </iframe>
+      </div>
+
+      {/* Footer */}
+      <div className="px-6 py-5 border-t border-slate-100 dark:border-slate-800 flex-shrink-0">
+        <button
+          onClick={onDone}
+          className={`w-full py-4 px-6 rounded-2xl text-sm font-black uppercase tracking-[0.15em] transition-all hover:scale-105 ${
+            isColorful
+              ? "bg-gradient-to-r from-pink-500 to-orange-400 text-white shadow-lg shadow-pink-500/20"
+              : "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
+          }`}
+        >
+          Enquête ingevuld ✓
+        </button>
+      </div>
+    </div>
+  )
+}
 
 export default function SurveyPopup() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isDismissed, setIsDismissed] = useState(false)
+  const [state, setState] = useState<"closed" | "open" | "minimized">("closed")
+  const [activeSurveyId, setActiveSurveyId] = useState<string | null>(null)
+  const [completed, setCompleted] = useState<string[]>([])
+  const { style } = useStyle()
+  const isColorful = style === "colorful"
 
   useEffect(() => {
-    const alreadySeen = sessionStorage.getItem("surveyDismissed")
-    if (!alreadySeen) {
-      const timer = setTimeout(() => setIsOpen(true), 10000)
+    const alreadyDismissed = sessionStorage.getItem("surveyDismissed")
+    if (!alreadyDismissed) {
+      const timer = setTimeout(() => setState("open"), 10000)
       return () => clearTimeout(timer)
-    } else {
-      setIsDismissed(true)
     }
   }, [])
 
   const handleDismiss = () => {
-    setIsOpen(false)
-    setIsDismissed(true)
+    setState("closed")
+    setActiveSurveyId(null)
     sessionStorage.setItem("surveyDismissed", "true")
   }
 
+  const handleMinimize = () => setState("minimized")
+  const handleOpen = () => setState("open")
+
+  const handleSurveyDone = () => {
+    if (!activeSurveyId) return
+    setCompleted((prev) => [...new Set([...prev, activeSurveyId])])
+    setActiveSurveyId(null)
+  }
+
+  const activeSurvey = SURVEYS.find((s) => s.id === activeSurveyId) ?? null
+
   return (
     <>
-      {isDismissed && (
+      {/* Knop rechtsonder — volledig gesloten */}
+      {state === "closed" && (
         <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-[199] bg-indigo-600 text-white text-xs font-bold px-4 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all"
+          onClick={handleOpen}
+          className={`fixed bottom-6 right-6 z-[199] text-sm font-black uppercase tracking-[0.15em] px-6 py-4 rounded-2xl shadow-xl transition-all hover:scale-105 ${
+            isColorful
+              ? "bg-gradient-to-r from-pink-500 to-orange-400 text-white shadow-pink-500/30"
+              : "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
+          }`}
         >
           ✨ Enquête
         </button>
       )}
 
-      {isOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-[200] bg-black/40 backdrop-blur-sm"
-            onClick={handleDismiss}
-          />
-          <div className="fixed z-[201] bottom-6 right-6 md:bottom-10 md:right-10 w-[calc(100vw-3rem)] max-w-md rounded-[2rem] shadow-2xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
-            <div className="h-2 w-full bg-indigo-600 dark:bg-indigo-500" />
-            <div className="p-8">
-              <button
-                onClick={handleDismiss}
-                className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
-              <div className="mb-5">
-                <span className="text-3xl">✨</span>
-                <h2 className="mt-2 text-xl font-semibold text-indigo-950 dark:text-white leading-snug">
-                  Wat vind jij van mijn portfolio?
-                </h2>
-              </div>
-
-              <p className="text-sm font-light text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
-                Ik ben <span className="font-medium text-indigo-950 dark:text-white">Joy Bevers</span>, grafisch & visual designer, en ik ben benieuwd naar jouw eerlijke mening over mijn website. Kies hieronder welke enquête je wilt invullen, het duurt slechts 2 minuutjes!
-              </p>
-
-              {/* ↓ wrapper div toegevoegd ↓ */}
-              <div className="flex flex-col gap-3">
-
-                {/* Enquête 1 — Portfolio-evaluatie */}
-                
-                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfDeFxnEZiLfrXYXqeUbC6bfqYHwLNv01s0OAzmMy2jevy0yA/viewform?usp=header"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-indigo-200 dark:hover:border-indigo-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-all duration-200 group"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-indigo-100 dark:bg-indigo-950 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-left">
-                    <p className="text-sm font-medium text-indigo-950 dark:text-white">Evaluatie van mijn portfolio</p>
-                    <p className="text-xs text-slate-400 dark:text-slate-500">Jouw algemene mening over mijn website</p>
-                  </div>
-                  <svg className="w-4 h-4 text-slate-300 group-hover:text-indigo-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-
-                {/* Enquête 2 — Navigatie */}
-                
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSd09Av10RnCfssRfeRqFEwBP2nVVVmBLa7fMlWTwE5CNVsIXw/viewform?usp=publish-editor"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-200 dark:hover:border-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-all duration-200 group"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-emerald-100 dark:bg-emerald-950 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 6h16M4 12h10M4 18h7" />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-left">
-                    <p className="text-sm font-medium text-indigo-950 dark:text-white">Navigatie van mijn portfolio</p>
-                    <p className="text-xs text-slate-400 dark:text-slate-500">Vind jij alles makkelijk terug?</p>
-                  </div>
-                  <svg className="w-4 h-4 text-slate-300 group-hover:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-
-                {/* Misschien later knop */}
-                <button
-                  onClick={handleDismiss}
-                  className="w-full py-3 px-6 rounded-xl text-sm border-2 border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 font-medium hover:border-slate-200 transition-all duration-300"
-                >
-                  Misschien later
-                </button>
-
-              </div>
-              {/* ↑ einde wrapper div ↑ */}
-
-            </div>
-          </div>
-        </>
+      {/* Tab-knop rechts — geminimaliseerd */}
+      {state === "minimized" && (
+        <button
+          onClick={handleOpen}
+          className={`fixed top-1/2 -translate-y-1/2 right-0 z-[201] text-xs font-black uppercase tracking-widest py-4 px-3 rounded-l-2xl shadow-xl transition-all hover:pr-4 ${
+            isColorful
+              ? "bg-gradient-to-b from-pink-500 to-orange-400 text-white"
+              : "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
+          }`}
+          style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
+        >
+          Enquête
+        </button>
       )}
+
+      {/* Side drawer */}
+      <div
+        className={`fixed top-0 right-0 z-[200] h-full w-full max-w-lg bg-white dark:bg-slate-900 border-l border-slate-100 dark:border-slate-800 shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${
+          state === "open" ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex-1 overflow-hidden">
+          {activeSurvey ? (
+            <SurveyEmbed
+              survey={activeSurvey}
+              onBack={() => setActiveSurveyId(null)}
+              onDone={handleSurveyDone}
+              onDismiss={handleDismiss}
+              onMinimize={handleMinimize}
+              isColorful={isColorful}
+            />
+          ) : (
+            <SurveyChoice
+              surveys={SURVEYS}
+              completed={completed}
+              onSelect={setActiveSurveyId}
+              onDismiss={handleDismiss}
+              onMinimize={handleMinimize}
+              isColorful={isColorful}
+            />
+          )}
+        </div>
+      </div>
     </>
   )
 }

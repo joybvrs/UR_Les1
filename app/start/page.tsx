@@ -57,7 +57,7 @@ export default function HomePage() {
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-32">
           <div className="lg:col-span-7 flex flex-col justify-center">
             <h1 className="text-7xl md:text-[8rem] font-black leading-[0.85] tracking-tighter text-slate-950 dark:text-white mb-8">
-            {HOME_CONFIG.hero.title}<br />
+              {HOME_CONFIG.hero.title}<br />
               <span className={`transition-all duration-700 ${
                 isColorful ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500" : "text-slate-900 dark:text-slate-200"
               }`}>
