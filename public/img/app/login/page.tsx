@@ -124,8 +124,8 @@ export default function LoginPage() {
           </Tabs>
 
           <div className="mt-8 text-center">
-            <Link href="/home" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors">
-              ← Terug naar home
+            <Link href="/start" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors">
+              ← Terug naar Start
             </Link>
           </div>
         </CardContent>

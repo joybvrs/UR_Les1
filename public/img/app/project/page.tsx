@@ -115,7 +115,7 @@ export default function ProjectsOverview() {
         <Link href="/" className={`text-sm font-black uppercase tracking-[0.3em] ${
           isColorful ? "text-pink-500 hover:text-violet-600" : "text-slate-400 hover:text-slate-950 dark:hover:text-white"
         }`}>
-          ← Terug naar Home
+          ← Terug naar Start
         </Link>
       </footer>
     </div>

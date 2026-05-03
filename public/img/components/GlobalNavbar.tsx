@@ -38,7 +38,7 @@ export default function GlobalNavbar() {
   if (!mounted) return <div className="h-16" />
 
   const navItems = [
-    { name: 'Home', href: '/home' },
+    { name: 'Start', href: '/start' },
     { name: 'About', href: '/about' },
     { name: 'Projecten', href: '/project' },
     { name: 'Admin', href: '/admin' },
