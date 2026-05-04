@@ -70,7 +70,7 @@ export default function HomePage() {
             <Link href="/project" className={`inline-block w-fit px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all hover:scale-105 ${
               isColorful ? "bg-slate-900 text-white shadow-xl shadow-pink-500/20" : "bg-slate-950 dark:bg-white text-white dark:text-slate-950"
             }`}>
-              Bekijk Portfolio
+              Bekijk mijn projecten
             </Link>
           </div>
 
