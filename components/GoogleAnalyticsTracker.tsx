@@ -3,12 +3,6 @@
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
-declare global {
-  interface Window {
-    gtag: (...args: any[]) => void
-  }
-}
-
 export default function GoogleAnalyticsTracker() {
   const pathname = usePathname()
 
