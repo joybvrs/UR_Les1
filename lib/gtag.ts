@@ -1,17 +1,5 @@
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? ""
 
-// Extend the Window interface so TypeScript knows about gtag
-declare global {
-  interface Window {
-    gtag: (
-      command: "config" | "event" | "js" | "set",
-      targetId: string | Date,
-      config?: Record<string, unknown>
-    ) => void
-    dataLayer: unknown[]
-  }
-}
-
 // ─── Pageview ────────────────────────────────────────────────────────────────
 
 export const pageview = (url: string) => {
