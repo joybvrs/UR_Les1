@@ -60,7 +60,6 @@ export default function GlobalNavbar() {
     { name: 'Start', href: '/start' },
     { name: 'Over mij', href: '/overmij' },
     { name: 'Projecten', href: '/project' },
-    { name: 'Admin', href: '/admin' },
     { name: 'Contact', href: '/contact' },
   ]
 
@@ -123,7 +122,7 @@ export default function GlobalNavbar() {
               <div className={`relative w-10 h-10 flex flex-col justify-center items-center rounded-full transition-all duration-300 ${
                 isMenuOpen
                   ? "bg-white text-indigo-950"
-                  : "bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-lg group-hover:scale-110"
+                  : (isColorful ? "bg-white text-slate-900" : "bg-slate-900 dark:bg-white text-white dark:text-slate-900") + " shadow-lg group-hover:scale-110"
               }`}>
                 <span className={`h-[1.5px] w-5 bg-current transition-all ${isMenuOpen ? "rotate-45 translate-y-[0.75px]" : "-translate-y-1"}`} />
                 <span className={`h-[1.5px] w-5 bg-current transition-all ${isMenuOpen ? "-rotate-45 -translate-y-[0.75px]" : "translate-y-1"}`} />
@@ -180,6 +179,17 @@ export default function GlobalNavbar() {
                 }`}
               >
                 LOGIN →
+              </button>
+              <button
+                onClick={() => handleNavigation('/admin', 'admin')}
+                disabled={isAnimating}
+                className={`block mt-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-200 disabled:opacity-30 text-left ${
+                  isColorful || darkMode
+                    ? "text-white/40 hover:text-white/80"
+                    : "text-slate-400 hover:text-slate-700"
+                }`}
+              >
+                Admin
               </button>
             </div>
           </div>

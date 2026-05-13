@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react"
 import Link from 'next/link'
 import { useStyle } from "@/components/ThemeProvider"
 
-// We definiëren precies hoe een project eruit ziet voor TypeScript
 interface Project {
   name: string;
   slug: string;
@@ -23,19 +22,23 @@ const PROJECTS_DATA: Project[] = [
   { name: "Sneaker", slug: "sneaker", category: "Promotie", description: "Visuele promotie sneaker.", image: "/img/nike.png" },
 ];
 
+const CATEGORIES = ["Alles", ...Array.from(new Set(PROJECTS_DATA.map(p => p.category)))];
+
+
 export default function ProjectsOverview() {
-  // We halen de hele context op in plaats van direct te destructureren
   const styleContext = useStyle();
   const [mounted, setMounted] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("Alles");
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => { setMounted(true); }, []);
 
-  // Veilige check: als de context er niet is, gebruiken we 'colorful' als standaard
   const isColorful = styleContext?.style === "colorful";
 
   if (!mounted) return null;
+
+  const filtered = activeCategory === "Alles"
+    ? PROJECTS_DATA
+    : PROJECTS_DATA.filter(p => p.category === activeCategory);
 
   return (
     <div className={`w-full min-h-screen transition-all duration-700 ${
@@ -43,70 +46,68 @@ export default function ProjectsOverview() {
     }`}>
 
       {/* HEADER */}
-      <section className="relative pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="flex flex-col items-start gap-4">
-          <span className={`text-[10px] font-black uppercase tracking-[0.4em] px-3 py-1.5 rounded-full border ${
-            isColorful ? "border-pink-500 text-pink-600 dark:text-pink-400" : "border-slate-300 dark:border-slate-700 text-slate-500"
-          }`}>
-            Portfolio
-          </span>
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-950 dark:text-white">
-            SELECTED <br />
-            <span className={`transition-all duration-700 ${
-              isColorful ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500" : "text-slate-900 dark:text-slate-200"
-            }`}>WORKS.</span>
-          </h1>
+      <section className="relative pt-32 pb-10 px-6 md:px-12 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="flex flex-col gap-4">
+            <span className={`text-[10px] font-black uppercase tracking-[0.4em] px-3 py-1.5 rounded-full border w-fit ${
+              isColorful ? "border-pink-500 text-pink-600 dark:text-pink-400" : "border-slate-300 dark:border-slate-700 text-slate-500"
+            }`}>
+              Portfolio
+            </span>
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-950 dark:text-white">
+              SELECTED<br />
+              <span className={`transition-all duration-700 ${
+                isColorful ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500" : "text-slate-900 dark:text-slate-200"
+              }`}>WORKS.</span>
+            </h1>
+          </div>
+
+          {/* Teller */}
+          <div className="flex flex-col items-start md:items-end gap-1 pb-2">
+            <span className="text-5xl font-black text-slate-950 dark:text-white tracking-tighter">
+              {filtered.length}<span className="text-slate-300 dark:text-slate-700">/{PROJECTS_DATA.length}</span>
+            </span>
+            <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-400">Projecten zichtbaar</span>
+          </div>
+        </div>
+
+        {/* Categoriefilters */}
+        <div className="flex flex-wrap gap-2 mt-10">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-200 border ${
+                activeCategory === cat
+                  ? isColorful
+                    ? "bg-slate-900 dark:bg-white text-white dark:text-slate-950 border-transparent"
+                    : "bg-slate-950 dark:bg-white text-white dark:text-slate-950 border-transparent"
+                  : isColorful
+                    ? "border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:border-pink-300 hover:text-pink-500"
+                    : "border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:border-slate-400"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
       </section>
 
-      {/* GRID (3 KOLOMMEN) */}
-      <main className="max-w-7xl mx-auto px-6 md:px-12 pb-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-          {PROJECTS_DATA.map((project) => (
-            <Link 
-              key={project.slug} 
-              href={`/${project.slug}`} 
-              className="group flex flex-col"
-              style={{ textDecoration: 'none' }}
-            >
-              <div className="relative overflow-hidden rounded-[30px] aspect-[4/5] mb-6 bg-slate-100 dark:bg-slate-900">
-                <img 
-                  src={project.image} 
-                  alt={project.name}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                  onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => { 
-                    const target = e.currentTarget;
-                    target.src = `https://via.placeholder.com/600x800?text=${project.name}`; 
-                  }}
-                />
-              </div>
+      {/* EDITORIAAL GRID */}
+      <main className="max-w-7xl mx-auto px-6 md:px-12 pb-32 mt-12">
 
-              <div className="px-2">
-                <div className="flex items-center gap-3 mb-2">
-                   <span className={`text-[9px] font-black uppercase tracking-widest ${
-                     isColorful ? "text-pink-500" : "text-slate-400"
-                   }`}>
-                     {project.category}
-                   </span>
-                   <div className="flex-grow h-[1px] bg-slate-200 dark:bg-white/10" />
-                </div>
-                
-                <h2 className="text-2xl font-black text-slate-950 dark:text-white tracking-tighter mb-2 group-hover:text-pink-500 transition-colors">
-                  {project.name}
-                </h2>
-                
-                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed overflow-hidden" 
-                   style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
-                  {project.description}
-                </p>
-                
-                <div className={`mt-4 inline-flex items-center text-[9px] font-black uppercase tracking-[0.2em] transition-all ${
-                  isColorful ? "text-pink-600 dark:text-pink-400 group-hover:translate-x-2" : "text-slate-950 dark:text-white"
-                }`}>
-                  Bekijk project <span className="ml-2">→</span>
-                </div>
-              </div>
-            </Link>
+        {filtered.length === 0 && (
+          <p className="text-slate-400 text-sm font-medium py-20 text-center">Geen projecten gevonden.</p>
+        )}
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {filtered.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              index={PROJECTS_DATA.indexOf(project)}
+              isColorful={isColorful}
+            />
           ))}
         </div>
       </main>
@@ -119,5 +120,73 @@ export default function ProjectsOverview() {
         </Link>
       </footer>
     </div>
-  )
+  );
+}
+
+function ProjectCard({
+  project,
+  index,
+  isColorful,
+}: {
+  project: Project;
+  index: number;
+  isColorful: boolean;
+}) {
+  const num = String(index + 1).padStart(2, "0");
+
+  return (
+    <Link
+      href={`/${project.slug}`}
+      className="group flex flex-col"
+      style={{ textDecoration: "none" }}
+    >
+      {/* Afbeelding */}
+      <div className="relative overflow-hidden rounded-[20px] aspect-square bg-slate-100 dark:bg-slate-900">
+        <img
+          src={project.image}
+          alt={project.name}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+            e.currentTarget.src = `https://via.placeholder.com/800x600?text=${project.name}`;
+          }}
+        />
+
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-7">
+          <div className="translate-y-3 group-hover:translate-y-0 transition-transform duration-400">
+            <span className={`text-[9px] font-black uppercase tracking-widest ${isColorful ? "text-pink-400" : "text-white/50"}`}>
+              {project.category}
+            </span>
+            <h2 className="text-2xl font-black text-white tracking-tighter mt-1">{project.name}</h2>
+            <p className="text-sm text-white/60 mt-1 line-clamp-2">{project.description}</p>
+            <span className={`inline-flex items-center gap-2 mt-4 text-[9px] font-black uppercase tracking-[0.2em] ${isColorful ? "text-pink-400" : "text-white"}`}>
+              Bekijk project →
+            </span>
+          </div>
+        </div>
+
+        {/* Projectnummer */}
+        <div className="absolute top-4 left-4 text-[10px] font-black text-white/50 tracking-[0.2em]">
+          {num}
+        </div>
+      </div>
+
+      {/* Labels onder kaart */}
+      <div className="mt-4 px-1 flex items-center justify-between">
+        <div>
+          <span className={`text-[9px] font-black uppercase tracking-widest ${isColorful ? "text-pink-500" : "text-slate-400"}`}>
+            {project.category}
+          </span>
+          <h3 className={`text-lg font-black tracking-tighter text-slate-950 dark:text-white group-hover:text-pink-500 transition-colors`}>
+            {project.name}
+          </h3>
+        </div>
+        <span className={`text-[10px] font-black uppercase tracking-[0.15em] transition-all opacity-0 group-hover:opacity-100 group-hover:translate-x-1 ${
+          isColorful ? "text-pink-500" : "text-slate-950 dark:text-white"
+        }`}>
+          →
+        </span>
+      </div>
+    </Link>
+  );
 }

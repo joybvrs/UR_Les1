@@ -1,148 +1,277 @@
 "use client"
+import Link from "next/link"
 import { useStyle } from "@/components/ThemeProvider"
+import { useEffect, useState } from "react"
+
+const SKILLS = [
+  "Visual Design", "Branding", "UI/UX", "Typography",
+  "Packaging", "Print", "Fotografie", "Concept",
+]
+
+const JOURNEY = [
+  {
+    period: "De Start",
+    place: "CVO Edu Kempen",
+    description: "Mijn grafische carrière begon in het volwassenenonderwijs met de richting Webdesigner. Hier ontdekte ik hoe leuk het is om digitale werelden te bouwen.",
+    accent: "from-pink-500 to-rose-500",
+  },
+  {
+    period: "De Verdieping",
+    place: "AP Hogeschool Antwerpen",
+    description: "De smaak smaakte naar meer. Ik dompelde me volledig onder in het vak via de opleiding Grafische en Digitale Media.",
+    accent: "from-violet-600 to-indigo-500",
+  },
+  {
+    period: "Altijd aanwezig",
+    place: "Camera in de hand",
+    description: "Eigenlijk zat de creativiteit er altijd al in. Naast grafisch werk leg ik de wereld ook vast door de lens van mijn camera.",
+    accent: "from-orange-500 to-amber-400",
+  },
+]
+
+const WERKWIJZE = [
+  {
+    step: "01",
+    title: "Kennismaken",
+    description: "We bespreken je wensen, doelgroep en doel. Ik luister, stel de juiste vragen en zorg dat ik jouw verhaal begrijp vóór er ook maar één lijn getekend wordt.",
+    accent: "from-pink-500 to-rose-500",
+  },
+  {
+    step: "02",
+    title: "Concept & Research",
+    description: "Ik duik in je wereld: concurrenten, stijlreferenties, moodboards. Hier ontstaat de creatieve richting — onderbouwd en doordacht.",
+    accent: "from-violet-600 to-indigo-500",
+  },
+  {
+    step: "03",
+    title: "Ontwerp & Verfijning",
+    description: "De eerste schetsen worden uitgewerkt tot een volledig ontwerp. Jij geeft feedback, ik verfijn — tot het precies klopt.",
+    accent: "from-orange-500 to-amber-400",
+  },
+  {
+    step: "04",
+    title: "Oplevering",
+    description: "Het eindresultaat wordt aangeleverd in de juiste formats, klaar voor gebruik. Strak, volledig en precies zoals afgesproken.",
+    accent: "from-emerald-500 to-teal-400",
+  },
+]
 
 export default function AboutPage() {
   const { style } = useStyle()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
   const isColorful = style === "colorful"
 
+  if (!mounted) return null
+
   return (
-    <div className={`w-full min-h-screen transition-colors duration-500 py-24 px-6 md:px-16 ${
-      isColorful
-        ? "bg-[radial-gradient(circle_at_top_left,#fff5f7,white,#fff9f0)] dark:bg-[radial-gradient(circle_at_top_left,#020617,#0f172a,#000000)]"
-        : "bg-white dark:bg-slate-900"
+    <div className={`relative w-full min-h-screen transition-all duration-700 overflow-x-hidden ${
+      isColorful ? "bg-[#fafafa] dark:bg-[#050505]" : "bg-white dark:bg-slate-950"
     }`}>
 
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="mb-16">
-          <h1 className={`text-4xl md:text-6xl transition-colors ${
-            isColorful
-              ? "font-black text-pink-500 dark:text-cyan-400"
-              : "font-semibold text-indigo-600 dark:text-indigo-400"
-          }`}>
-            Hoi, ik ben Joy!
-          </h1>
+      {/* ACHTERGROND */}
+      {isColorful && (
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-[5%] right-[-10%] w-[50%] h-[50%] bg-pink-100/50 dark:bg-pink-900/10 blur-[140px] rounded-full" />
+          <div className="absolute bottom-[20%] left-[-10%] w-[40%] h-[40%] bg-orange-100/40 dark:bg-orange-900/10 blur-[140px] rounded-full" />
         </div>
+      )}
 
-        {/* Foto + Tekst */}
-        <div className="flex flex-col md:flex-row gap-12 items-center mb-24">
+      <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-40">
 
-          {/* Tekst Sectie */}
-          <div className="flex-1">
-            <p className={`text-lg md:text-xl leading-relaxed text-indigo-950/80 dark:text-slate-300 transition-colors ${
-              isColorful ? "font-normal" : "font-light"
+        {/* ── HERO ── */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-28">
+
+          {/* Links: tekst */}
+          <div className="lg:col-span-7">
+            <span className={`inline-block text-[10px] font-black uppercase tracking-[0.4em] px-3 py-1.5 rounded-full border mb-8 ${
+              isColorful ? "border-pink-400 text-pink-500" : "border-slate-300 dark:border-slate-700 text-slate-500"
             }`}>
-              Welkom op mijn pagina! Ik ben{" "}
-              <span className={`${isColorful ? "font-bold text-pink-500 dark:text-cyan-400" : "font-medium text-indigo-600 dark:text-indigo-400"}`}>
-                26 jaar
-              </span>{" "}
-              en heb een enorme passie voor alles wat met creativiteit te maken heeft. Als{" "}
-              <span className={`${isColorful ? "font-bold text-orange-500 dark:text-blue-400" : "font-medium text-indigo-500 dark:text-indigo-400"}`}>
-                Grafisch Designer
-              </span>{" "}
-              tover ik concepten om tot visuele verhalen.
+              Over mij
+            </span>
+
+            <h1 className="text-[4.5rem] md:text-[6.5rem] lg:text-[7.5rem] font-black leading-[0.85] tracking-tighter text-slate-950 dark:text-white mb-8">
+              HOI, IK<br />
+              BEN{" "}
+              <span className={`transition-all duration-700 ${
+                isColorful
+                  ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500"
+                  : "text-slate-700 dark:text-slate-300"
+              }`}>
+                JOY.
+              </span>
+            </h1>
+
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-lg font-medium leading-relaxed mb-10">
+              26 jaar, Antwerpen. Grafisch designer met een grote passie voor visuele verhalen — van branding tot UI, van print tot fotografie.
             </p>
 
-            <ul className={`mt-8 space-y-4 text-indigo-950 dark:text-slate-200 ${
-              isColorful ? "font-normal" : "font-light"
-            }`}>
-              <li className="flex items-center gap-3">
-                {isColorful ? <span className="text-pink-500 font-bold text-xl">✦</span> : <span className="text-indigo-400">→</span>}
-                <span className="opacity-80">Specialisatie in Visual Design</span>
-              </li>
-              <li className="flex items-center gap-3">
-                {isColorful ? <span className="text-orange-500 font-bold text-xl">✦</span> : <span className="text-indigo-400">→</span>}
-                <span className="opacity-80">Gevoel voor kleur en detail</span>
-              </li>
-              <li className="flex items-center gap-3">
-                {isColorful ? <span className="text-cyan-500 font-bold text-xl">✦</span> : <span className="text-indigo-400">→</span>}
-                <span className="opacity-80">Gepassioneerd door fotografie</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Foto Sectie */}
-          <div className="relative shrink-0">
-            <div className={`w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl transition-all border-4 ${
-              isColorful
-                ? "border-white dark:border-cyan-400/50"
-                : "border-indigo-100 dark:border-indigo-900"
-            }`}>
-              <img src="img/foto-joy.jpeg" alt="Joy" className="w-full h-full object-cover" />
+            {/* Skills */}
+            <div className="flex flex-wrap gap-2">
+              {SKILLS.map((skill) => (
+                <span key={skill} className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border transition-all ${
+                  isColorful
+                    ? "border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:border-pink-300 hover:text-pink-500"
+                    : "border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400"
+                }`}>
+                  {skill}
+                </span>
+              ))}
             </div>
-            {isColorful ? (
-              <div className="absolute inset-0 bg-cyan-500/20 blur-3xl rounded-full -z-10 dark:opacity-100 transition-opacity" />
-            ) : (
-              <div className="absolute inset-0 bg-indigo-500/10 blur-3xl rounded-full -z-10 dark:opacity-60 transition-opacity" />
-            )}
           </div>
-        </div>
 
-        {/* Mijn Reis Sectie */}
-        <div className="mb-24">
-          <h2 className={`text-3xl mb-12 ${
-            isColorful ? "font-black text-orange-500 dark:text-blue-400" : "font-medium text-indigo-600 dark:text-indigo-400"
-          }`}>
-            Hoe ik hier ben geraakt
+          {/* Rechts: foto */}
+          <div className="lg:col-span-5">
+            <div className="relative">
+              <div className="overflow-hidden rounded-[40px] shadow-2xl aspect-[3/4]">
+                <img
+                  src="/img/foto-joy.jpeg"
+                  alt="Joy Bevers"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {isColorful && (
+                <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-[24px] bg-gradient-to-br from-pink-500 to-orange-400 -z-10 blur-2xl opacity-40" />
+              )}
+              {/* Floating tag */}
+              <div className={`absolute -bottom-4 -left-4 px-5 py-3 rounded-2xl shadow-lg ${
+                isColorful ? "bg-white dark:bg-slate-900" : "bg-slate-950 dark:bg-white"
+              }`}>
+                <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${
+                  isColorful ? "text-slate-400" : "text-white dark:text-slate-950"
+                }`}>Based in</span>
+                <p className={`text-sm font-black tracking-tight ${
+                  isColorful ? "text-slate-950 dark:text-white" : "text-white dark:text-slate-950"
+                }`}>Antwerpen</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── JOURNEY ── */}
+        <section className="mb-28">
+          <h2 className="text-4xl font-black tracking-tighter text-slate-950 dark:text-white mb-14">
+            Hoe ik hier<br />
+            <span className={`italic ${isColorful ? "text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500" : "text-slate-500 dark:text-slate-400"}`}>
+              ben geraakt.
+            </span>
           </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="space-y-4">
-              <span className={`text-sm font-bold uppercase tracking-wider ${isColorful ? "text-pink-500" : "text-indigo-400"}`}>De Start</span>
-              <p className={`leading-relaxed text-indigo-950/70 dark:text-slate-400 ${isColorful ? "font-normal" : "font-light"}`}>
-                Mijn grafische carrière begon bij <strong>CVO Edu Kempen</strong>. In het volwassenenonderwijs volgde ik de richting Webdesigner. Hier ontdekte ik hoe leuk het is om digitale werelden te bouwen.
-              </p>
-            </div>
 
-            <div className="space-y-4 border-l border-slate-200 dark:border-slate-800 pl-8">
-              <span className={`text-sm font-bold uppercase tracking-wider ${isColorful ? "text-orange-500" : "text-indigo-400"}`}>De Verdieping</span>
-              <p className={`leading-relaxed text-indigo-950/70 dark:text-slate-400 ${isColorful ? "font-normal" : "font-light"}`}>
-                De smaak smaakte naar meer! Ik besloot me volledig onder te dompelen in het vak en trok naar de <strong>AP Hogeschool in Antwerpen</strong> voor de opleiding Grafische en Digitale Media.
-              </p>
-            </div>
-
-            <div className="space-y-4 border-l border-slate-200 dark:border-slate-800 pl-8">
-              <span className={`text-sm font-bold uppercase tracking-wider ${isColorful ? "text-cyan-500" : "text-indigo-400"}`}>Altijd aanwezig</span>
-              <p className={`leading-relaxed text-indigo-950/70 dark:text-slate-400 ${isColorful ? "font-normal" : "font-light"}`}>
-                Eigenlijk zat de creativiteit er altijd al in, ik deed er alleen niet altijd iets mee. Naast het grafische werk vind ik het heerlijk om de wereld vast te leggen door de lens van mijn <strong>camera</strong>.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {JOURNEY.map((step, i) => (
+              <div key={i} className={`p-8 rounded-[32px] border flex flex-col gap-5 ${
+                isColorful
+                  ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5"
+                  : "bg-transparent border-slate-200 dark:border-slate-800"
+              }`}>
+                <div className={`w-10 h-1 rounded-full bg-gradient-to-r ${step.accent}`} />
+                <div>
+                  <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${
+                    isColorful ? "text-pink-500" : "text-slate-400"
+                  }`}>
+                    {step.period}
+                  </span>
+                  <h3 className="text-lg font-black text-slate-950 dark:text-white tracking-tighter mt-1">
+                    {step.place}
+                  </h3>
+                </div>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            ))}
           </div>
-        </div>
+        </section>
 
-        {/* Onderste blokjes */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className={`p-8 rounded-[32px] transition-all border ${
+        {/* ── WAT IK DOE ── */}
+        <section className="mb-28">
+          <div className={`p-12 md:p-16 rounded-[40px] ${
             isColorful
-              ? "bg-pink-50/50 dark:bg-slate-800/40 border-pink-100 dark:border-slate-700"
-              : "bg-slate-50 dark:bg-slate-800/20 border-slate-100 dark:border-slate-800"
+              ? "bg-slate-950 dark:bg-white/5"
+              : "bg-slate-950 dark:bg-white/5"
           }`}>
-            <h3 className={`text-2xl mb-2 ${
-              isColorful
-                ? "font-bold text-pink-500 dark:text-cyan-400"
-                : "font-medium text-indigo-600 dark:text-indigo-400"
-            }`}>Wat ik doe</h3>
-            <p className={`text-sm opacity-70 ${isColorful ? "font-normal" : "font-light"}`}>
-              Mijn ontwerpen zijn niet alleen visueel aantrekkelijk, maar vertellen een verhaal. Ik combineer mijn technische kennis van webdesign met de grafische skills van AP.
+            <p className={`text-[10px] font-black uppercase tracking-[0.4em] mb-6 ${
+              isColorful ? "text-pink-400" : "text-slate-400"
+            }`}>
+              Mijn aanpak
+            </p>
+            <p className="text-2xl md:text-4xl font-black text-white dark:text-white tracking-tighter leading-tight max-w-3xl">
+              Mijn ontwerpen zijn niet alleen visueel aantrekkelijk —
+              <span className={`italic ${isColorful ? " text-pink-400" : " text-slate-400"}`}> ze vertellen een verhaal.</span>
+            </p>
+            <p className="text-slate-400 mt-6 max-w-xl leading-relaxed">
+              Ik combineer technische kennis van webdesign met grafische skills, en zorg er altijd voor dat vorm én inhoud kloppen.
             </p>
           </div>
+        </section>
 
-          <div className={`p-8 rounded-[32px] transition-all border ${
-            isColorful
-              ? "bg-orange-50/50 dark:bg-slate-800/40 border-orange-100 dark:border-slate-700"
-              : "bg-slate-50 dark:bg-slate-800/20 border-slate-100 dark:border-slate-800"
-          }`}>
-            <h3 className={`text-2xl mb-2 ${
-              isColorful
-                ? "font-bold text-orange-500 dark:text-blue-400"
-                : "font-medium text-indigo-600 dark:text-indigo-400"
-            }`}>Samenwerken?</h3>
-            <p className={`text-sm opacity-70 ${isColorful ? "font-normal" : "font-light"}`}>
-              Heb je een leuk project in gedachten waar zowel design als een goede visuele presentatie (of fotografie!) voor nodig is?
+        {/* ── WERKWIJZE ── */}
+        <section className="mb-28">
+          <h2 className="text-4xl font-black tracking-tighter text-slate-950 dark:text-white mb-3">
+            Mijn werkwijze.
+          </h2>
+          <p className="text-slate-500 dark:text-slate-400 font-medium mb-14 max-w-lg">
+            Van eerste gesprek tot eindoplevering — zo pak ik een project aan.
+          </p>
+
+          <div className="flex flex-col">
+            {WERKWIJZE.map((item, i) => (
+              <div key={item.step} className="grid grid-cols-[auto_1px_1fr] gap-x-8 group">
+
+                {/* Nummer */}
+                <div className="flex flex-col items-center">
+                  <span className={`text-[5rem] font-black tracking-tighter leading-none bg-gradient-to-br ${item.accent} text-transparent bg-clip-text`}>
+                    {item.step}
+                  </span>
+                </div>
+
+                {/* Verticale lijn */}
+                <div className="flex flex-col items-center py-2">
+                  <div className={`flex-1 w-[1px] ${
+                    isColorful ? "bg-slate-200 dark:bg-white/10" : "bg-slate-200 dark:bg-slate-800"
+                  } ${i === WERKWIJZE.length - 1 ? "opacity-0" : ""}`} />
+                </div>
+
+                {/* Inhoud */}
+                <div className={`pb-14 pt-3 ${i === WERKWIJZE.length - 1 ? "pb-0" : ""}`}>
+                  <h3 className="text-2xl font-black text-slate-950 dark:text-white tracking-tighter mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-lg">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── CTA ── */}
+        <section className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 border-t pt-16 ${
+          isColorful ? 'border-slate-100 dark:border-white/5' : 'border-slate-200 dark:border-slate-800'
+        }">
+          <div>
+            <h2 className="text-4xl font-black tracking-tighter text-slate-950 dark:text-white">
+              Laten we samenwerken.
+            </h2>
+            <p className="text-slate-500 dark:text-slate-400 mt-2 font-medium">
+              Heb je een project in gedachten? Ik hoor het graag.
             </p>
           </div>
-        </div>
-      </div>
+          <Link
+            href="/contact"
+            className={`shrink-0 inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all hover:scale-105 ${
+              isColorful
+                ? "bg-slate-900 dark:bg-white text-white dark:text-slate-950 shadow-xl shadow-pink-500/20"
+                : "bg-slate-950 dark:bg-white text-white dark:text-slate-950"
+            }`}
+          >
+            Neem contact op
+            <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+          </Link>
+        </section>
+
+      </main>
     </div>
   )
 }
