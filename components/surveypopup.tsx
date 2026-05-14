@@ -44,7 +44,7 @@ export default function SurveyPopup() {
           }`}
         >
           <span className="text-sm font-black uppercase tracking-[0.15em]">Enquête</span>
-          <span className="text-[10px] font-medium opacity-80 mt-0.5 normal-case tracking-normal">Wat vind jij van mijn portfolio?</span>
+          <span className="text-xs font-medium opacity-90 mt-0.5 normal-case tracking-normal">Wat vind jij van mijn portfolio?</span>
         </button>
       )}
 
