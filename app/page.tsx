@@ -145,7 +145,7 @@ export default function HomePage() {
               variants={{ ...stagger, visible: { transition: { staggerChildren: 0.15, delayChildren: 1 } } }}
             >
               {[
-                { title: "Branding", gradient: "from-pink-500 to-rose-500", text: "Van logo tot volledige brand guide — ik leg de visuele basis van een merk." },
+                { title: "Branding", gradient: "from-pink-500 to-rose-500", text: "Van logo tot volledige brand guide. Ik leg de visuele basis van een merk." },
                 { title: "Design", gradient: "from-violet-600 to-indigo-500", text: "Gedurfd digitaal design dat esthetisch sterk én gebruiksvriendelijk is." },
                 { title: "Concept", gradient: "from-orange-500 to-amber-500", text: "Elk ontwerp begint bij een sterk idee. Ik vertaal jouw vraag naar een helder concept." },
               ].map(({ title, gradient, text }) => (
