@@ -97,9 +97,7 @@ export default function HomePage() {
               animate="visible"
               variants={stagger}
             >
-              {["JOUW IDEE,", "MIJN"].map((line) => (
-                <motion.span key={line} className="block" variants={fadeUp}>{line}</motion.span>
-              ))}
+              <motion.span className="block" variants={fadeUp}>JOUW IDEE,</motion.span>
               <motion.span
                 className={`block transition-all duration-700 ${
                   isColorful
@@ -108,7 +106,7 @@ export default function HomePage() {
                 }`}
                 variants={fadeUp}
               >
-                VERHAAL.
+                MIJN VERHAAL.
               </motion.span>
             </motion.h1>
 
