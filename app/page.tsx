@@ -92,7 +92,7 @@ export default function HomePage() {
           {/* Links: tekst */}
           <div className="lg:col-span-7 flex flex-col justify-start pt-4">
             <motion.h1
-              className="text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[8rem] font-black leading-[0.82] tracking-tighter text-slate-950 dark:text-white mb-10"
+              className="text-[2.4rem] sm:text-[3.2rem] md:text-[4.2rem] lg:text-[5rem] font-black leading-[0.9] tracking-tighter text-slate-950 dark:text-white mb-10"
               initial="hidden"
               animate="visible"
               variants={stagger}
