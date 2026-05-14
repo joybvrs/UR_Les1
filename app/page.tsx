@@ -129,13 +129,37 @@ export default function HomePage() {
             </motion.div>
 
             <motion.p
-              className="text-lg text-slate-500 dark:text-slate-400 max-w-sm font-medium leading-relaxed"
+              className="text-lg text-slate-500 dark:text-slate-400 max-w-sm font-medium leading-relaxed mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               Ik vertaal complexe ideeën naar heldere, esthetische visuals die impact maken.
             </motion.p>
+
+            {/* Diensten */}
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+              initial="hidden"
+              animate="visible"
+              variants={{ ...stagger, visible: { transition: { staggerChildren: 0.15, delayChildren: 1 } } }}
+            >
+              {[
+                { title: "Branding", gradient: "from-pink-500 to-rose-500", text: "Van logo tot volledige brand guide — ik leg de visuele basis van een merk." },
+                { title: "Design", gradient: "from-violet-600 to-indigo-500", text: "Gedurfd digitaal design dat esthetisch sterk én gebruiksvriendelijk is." },
+                { title: "Concept", gradient: "from-orange-500 to-amber-500", text: "Elk ontwerp begint bij een sterk idee. Ik vertaal jouw vraag naar een helder concept." },
+              ].map(({ title, gradient, text }) => (
+                <motion.div
+                  key={title}
+                  variants={fadeUp}
+                  className={`p-6 rounded-[28px] border transition-all ${isColorful ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5" : "bg-transparent border-slate-200 dark:border-slate-800"}`}
+                >
+                  <div className={`w-8 h-1 rounded-full bg-gradient-to-r ${gradient} mb-4`} />
+                  <h3 className="text-base font-black text-slate-900 dark:text-white tracking-tighter">{title}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">{text}</p>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
 
           {/* Rechts: featured video */}
@@ -256,30 +280,6 @@ export default function HomePage() {
           </motion.div>
         </section>
 
-        {/* ── DIENSTEN ── */}
-        <motion.section
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={{ ...stagger, visible: { transition: { staggerChildren: 0.15 } } }}
-        >
-          {[
-            { title: "Branding", gradient: "from-pink-500 to-rose-500", text: "Ik bouw visuele fundamenten. Van logo-ontwerp tot volledige brand guides die de essentie van een merk vastleggen en consistent doorvertalen naar elk platform." },
-            { title: "Design", gradient: "from-violet-600 to-indigo-500", text: "Gedurfd digitaal design dat werkt. Ik ontwerp interfaces (UI) en interacties die niet alleen esthetisch hoogstaand zijn, maar ook een naadloze gebruikerservaring (UX) bieden." },
-            { title: "Concept", gradient: "from-orange-500 to-amber-500", text: "Elk groot ontwerp begint bij een sterk idee. Ik help bij het vertalen van complexe vraagstukken naar heldere visuele concepten die een boodschap echt laten binnenkomen." },
-          ].map(({ title, gradient, text }) => (
-            <motion.div
-              key={title}
-              variants={fadeUp}
-              className={`p-10 rounded-[40px] border transition-all ${isColorful ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5" : "bg-transparent border-slate-200 dark:border-slate-800"}`}
-            >
-              <div className={`w-10 h-1 rounded-full bg-gradient-to-r ${gradient} mb-6`} />
-              <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">{title}</h3>
-              <p className="text-sm text-slate-500 mt-2">{text}</p>
-            </motion.div>
-          ))}
-        </motion.section>
       </main>
     </div>
   )
