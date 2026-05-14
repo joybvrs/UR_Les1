@@ -99,7 +99,7 @@ export default function HomePage() {
             >
               <motion.span className="block" variants={fadeUp}>JOUW IDEE,</motion.span>
               <motion.span
-                className={`block transition-all duration-700 ${
+                className={`block whitespace-nowrap transition-all duration-700 ${
                   isColorful
                     ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500"
                     : "text-slate-700 dark:text-slate-300"
