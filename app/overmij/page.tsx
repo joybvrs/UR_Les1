@@ -1,7 +1,18 @@
 "use client"
 import Link from "next/link"
+import { motion } from "framer-motion"
 import { useStyle } from "@/components/ThemeProvider"
 import { useEffect, useState } from "react"
+
+const ease = [0.25, 0.46, 0.45, 0.94] as const
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
+}
+const stagger = (delay = 0) => ({
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: delay } },
+})
 
 const SKILLS = [
   "Visual Design", "Branding", "UI/UX", "Typography",
@@ -83,14 +94,14 @@ export default function AboutPage() {
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-28">
 
           {/* Links: tekst */}
-          <div className="lg:col-span-7">
-            <span className={`inline-block text-[10px] font-black uppercase tracking-[0.4em] px-3 py-1.5 rounded-full border mb-8 ${
+          <motion.div className="lg:col-span-7" initial="hidden" animate="visible" variants={stagger(0)}>
+            <motion.span variants={fadeUp} className={`inline-block text-[10px] font-black uppercase tracking-[0.4em] px-3 py-1.5 rounded-full border mb-8 ${
               isColorful ? "border-pink-400 text-pink-500" : "border-slate-300 dark:border-slate-700 text-slate-500"
             }`}>
               Over mij
-            </span>
+            </motion.span>
 
-            <h1 className="text-[4.5rem] md:text-[6.5rem] lg:text-[7.5rem] font-black leading-[0.85] tracking-tighter text-slate-950 dark:text-white mb-8">
+            <motion.h1 variants={fadeUp} className="text-[4.5rem] md:text-[6.5rem] lg:text-[7.5rem] font-black leading-[0.85] tracking-tighter text-slate-950 dark:text-white mb-8">
               HOI, IK<br />
               BEN{" "}
               <span className={`transition-all duration-700 ${
@@ -100,28 +111,33 @@ export default function AboutPage() {
               }`}>
                 JOY.
               </span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-lg font-medium leading-relaxed mb-10">
+            <motion.p variants={fadeUp} className="text-xl text-slate-600 dark:text-slate-400 max-w-lg font-medium leading-relaxed mb-10">
               26 jaar, Antwerpen. Grafisch designer met een grote passie voor visuele verhalen — van branding tot UI, van print tot fotografie.
-            </p>
+            </motion.p>
 
             {/* Skills */}
-            <div className="flex flex-wrap gap-2">
+            <motion.div className="flex flex-wrap gap-2" variants={stagger(0.1)}>
               {SKILLS.map((skill) => (
-                <span key={skill} className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border transition-all ${
+                <motion.span key={skill} variants={fadeUp} className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border transition-all ${
                   isColorful
                     ? "border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:border-pink-300 hover:text-pink-500"
                     : "border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400"
                 }`}>
                   {skill}
-                </span>
+                </motion.span>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Rechts: foto */}
-          <div className="lg:col-span-5">
+          <motion.div
+            className="lg:col-span-5"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3, ease }}
+          >
             <div className="relative">
               <div className="overflow-hidden rounded-[40px] shadow-2xl aspect-[3/4]">
                 <img
@@ -145,7 +161,7 @@ export default function AboutPage() {
                 }`}>Antwerpen</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ── JOURNEY ── */}
@@ -157,9 +173,9 @@ export default function AboutPage() {
             </span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger(0)}>
             {JOURNEY.map((step, i) => (
-              <div key={i} className={`p-8 rounded-[32px] border flex flex-col gap-5 ${
+              <motion.div key={i} variants={fadeUp} className={`p-8 rounded-[32px] border flex flex-col gap-5 ${
                 isColorful
                   ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5"
                   : "bg-transparent border-slate-200 dark:border-slate-800"
@@ -178,14 +194,19 @@ export default function AboutPage() {
                 <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
                   {step.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* ── WAT IK DOE ── */}
         <section className="mb-28">
-          <div className={`p-12 md:p-16 rounded-[40px] ${
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease }}
+            className={`p-12 md:p-16 rounded-[40px] ${
             isColorful
               ? "bg-slate-950 dark:bg-white/5"
               : "bg-slate-950 dark:bg-white/5"
@@ -202,21 +223,24 @@ export default function AboutPage() {
             <p className="text-slate-400 mt-6 max-w-xl leading-relaxed">
               Ik combineer technische kennis van webdesign met grafische skills, en zorg er altijd voor dat vorm én inhoud kloppen.
             </p>
-          </div>
+          </motion.div>
         </section>
 
         {/* ── WERKWIJZE ── */}
         <section className="mb-28">
-          <h2 className="text-4xl font-black tracking-tighter text-slate-950 dark:text-white mb-3">
+          <motion.h2
+            className="text-4xl font-black tracking-tighter text-slate-950 dark:text-white mb-3"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, ease }}
+          >
             Mijn werkwijze.
-          </h2>
+          </motion.h2>
           <p className="text-slate-500 dark:text-slate-400 font-medium mb-14 max-w-lg">
             Van eerste gesprek tot eindoplevering — zo pak ik een project aan.
           </p>
 
-          <div className="flex flex-col">
+          <motion.div className="flex flex-col" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={stagger(0)}>
             {WERKWIJZE.map((item, i) => (
-              <div key={item.step} className="grid grid-cols-[auto_1px_1fr] gap-x-8 group">
+              <motion.div key={item.step} variants={fadeUp} className="grid grid-cols-[auto_1px_1fr] gap-x-8 group">
 
                 {/* Nummer */}
                 <div className="flex flex-col items-center">
@@ -241,9 +265,9 @@ export default function AboutPage() {
                     {item.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* ── CTA ── */}

@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
+import { motion } from "framer-motion"
 import { useStyle } from "@/components/ThemeProvider"
 
 const PROJECTS = [
@@ -12,60 +13,70 @@ const PROJECTS = [
   { name: "Typografische poster", slug: "typografischeposter", category: "Poster Design", description: "Typografisch poster design.", image: "/img/poster.jpg" },
   { name: "Portfolio in data", slug: "data", category: "Web Design", description: "Webdesign met data verwerkt.", image: "/img/data.png" },
   { name: "Sneaker", slug: "sneaker", category: "Promotie", description: "Visuele promotie sneaker.", image: "/img/nike.png" },
-];
+]
 
-const TICKER = ["Branding", "UX/UI Design", "Packaging", "Print", "Identiteit", "Web Design", "Concept", "Poster Design"];
+const TICKER = ["Branding", "UX/UI Design", "Packaging", "Print", "Identiteit", "Web Design", "Concept", "Poster Design"]
+
+const ease = [0.25, 0.46, 0.45, 0.94] as const
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
+}
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+}
 
 function ProjectCard({ proj, isColorful }: { proj: typeof PROJECTS[0]; isColorful: boolean }) {
   return (
-    <Link href={`/${proj.slug}`} className="group flex flex-col">
-      <div className="relative overflow-hidden rounded-[30px] aspect-[4/5] mb-5 bg-slate-100 dark:bg-slate-900">
-        <img
-          src={proj.image}
-          alt={proj.name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = `https://via.placeholder.com/600x800?text=${proj.name}`;
-          }}
-        />
-      </div>
-      <div className="flex items-center gap-3 mb-2">
-        <span className={`text-[9px] font-black uppercase tracking-widest ${isColorful ? "text-pink-500" : "text-slate-400"}`}>
-          {proj.category}
-        </span>
-        <div className="flex-grow h-[1px] bg-slate-200 dark:bg-white/10" />
-      </div>
-      <h3 className="text-xl font-black text-slate-950 dark:text-white tracking-tighter group-hover:text-pink-500 transition-colors">
-        {proj.name}
-      </h3>
-      <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed line-clamp-2">
-        {proj.description}
-      </p>
-    </Link>
-  );
+    <motion.div variants={fadeUp}>
+      <Link href={`/${proj.slug}`} className="group flex flex-col">
+        <div className="relative overflow-hidden rounded-[30px] aspect-[4/5] mb-5 bg-slate-100 dark:bg-slate-900">
+          <img
+            src={proj.image}
+            alt={proj.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement
+              target.src = `https://via.placeholder.com/600x800?text=${proj.name}`
+            }}
+          />
+        </div>
+        <div className="flex items-center gap-3 mb-2">
+          <span className={`text-[9px] font-black uppercase tracking-widest ${isColorful ? "text-pink-500" : "text-slate-400"}`}>
+            {proj.category}
+          </span>
+          <div className="flex-grow h-[1px] bg-slate-200 dark:bg-white/10" />
+        </div>
+        <h3 className="text-xl font-black text-slate-950 dark:text-white tracking-tighter group-hover:text-pink-500 transition-colors">
+          {proj.name}
+        </h3>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed line-clamp-2">
+          {proj.description}
+        </p>
+      </Link>
+    </motion.div>
+  )
 }
 
 export default function HomePage() {
-  const styleContext = useStyle();
-  const [mounted, setMounted] = useState(false);
+  const styleContext = useStyle()
+  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => { setMounted(true) }, [])
 
-  const isColorful = styleContext ? styleContext.style === "colorful" : true;
+  const isColorful = styleContext ? styleContext.style === "colorful" : true
 
-  if (!mounted) return null;
+  if (!mounted) return null
 
-  const featured = PROJECTS[2]; // Cinecity als uitgelicht project
+  const featured = PROJECTS[2]
 
   return (
     <div className={`relative w-full min-h-screen transition-all duration-700 overflow-x-hidden ${
       isColorful ? "bg-[#fafafa] dark:bg-[#050505]" : "bg-white dark:bg-slate-950"
     }`}>
 
-      {/* ACHTERGROND GLOWS */}
       {isColorful && (
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute top-[5%] left-[-15%] w-[55%] h-[55%] bg-pink-100/50 dark:bg-pink-900/10 blur-[140px] rounded-full" />
@@ -80,46 +91,67 @@ export default function HomePage() {
 
           {/* Links: tekst */}
           <div className="lg:col-span-7 flex flex-col justify-start pt-4">
-            <h1 className="text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[8rem] font-black leading-[0.82] tracking-tighter text-slate-950 dark:text-white mb-10">
-              CREATE<br />
-              IMPACT.<br />
-              <span className={`transition-all duration-700 ${
-                isColorful
-                  ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500"
-                  : "text-slate-700 dark:text-slate-300"
-              }`}>
+            <motion.h1
+              className="text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[8rem] font-black leading-[0.82] tracking-tighter text-slate-950 dark:text-white mb-10"
+              initial="hidden"
+              animate="visible"
+              variants={stagger}
+            >
+              {["CREATE", "IMPACT."].map((line) => (
+                <motion.span key={line} className="block" variants={fadeUp}>{line}</motion.span>
+              ))}
+              <motion.span
+                className={`block transition-all duration-700 ${
+                  isColorful
+                    ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500"
+                    : "text-slate-700 dark:text-slate-300"
+                }`}
+                variants={fadeUp}
+              >
                 DESIGN.
-              </span>
-            </h1>
+              </motion.span>
+            </motion.h1>
 
-            <div className="flex flex-wrap gap-x-10 gap-y-3 mb-10">
+            <motion.div
+              className="flex flex-wrap gap-x-10 gap-y-3 mb-10"
+              initial="hidden"
+              animate="visible"
+              variants={{ ...stagger, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.5 } } }}
+            >
               {[
                 { value: `${PROJECTS.length}`, label: "Projecten" },
                 { value: "5+", label: "Categorieën" },
                 { value: "Antwerpen", label: "Based in" },
               ].map(({ value, label }) => (
-                <div key={label} className="flex flex-col">
+                <motion.div key={label} className="flex flex-col" variants={fadeUp}>
                   <span className="text-3xl font-black text-slate-950 dark:text-white tracking-tighter">{value}</span>
                   <span className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-400 mt-0.5">{label}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <p className="text-lg text-slate-500 dark:text-slate-400 max-w-sm font-medium leading-relaxed">
+            <motion.p
+              className="text-lg text-slate-500 dark:text-slate-400 max-w-sm font-medium leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
               Ik vertaal complexe ideeën naar heldere, esthetische visuals die impact maken.
-            </p>
+            </motion.p>
           </div>
 
-          {/* Rechts: featured project */}
-          <div className="lg:col-span-5">
+          {/* Rechts: featured video */}
+          <motion.div
+            className="lg:col-span-5"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease }}
+          >
             <Link href={`/${featured.slug}`} className="group block relative">
               <div className="relative overflow-hidden rounded-[40px] shadow-2xl aspect-[3/4]">
                 <video
                   src="/img/cinecity4.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+                  autoPlay loop muted playsInline
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-slate-950/55 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
@@ -140,9 +172,8 @@ export default function HomePage() {
                 Uitgelicht ↗
               </div>
             </Link>
-          </div>
+          </motion.div>
         </div>
-
       </section>
 
       {/* ── TICKER ── */}
@@ -164,21 +195,31 @@ export default function HomePage() {
       {/* ── WERKEN ── */}
       <main className="relative z-20 max-w-7xl mx-auto pb-40 px-6 md:px-12">
         <section className="pt-28 mb-32">
-          <div className="flex items-baseline justify-between mb-12">
+          <motion.div
+            className="flex items-baseline justify-between mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter">Mijn Werken</h2>
             <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${isColorful ? "text-pink-500" : "text-slate-400"}`}>
               {PROJECTS.length} projecten
             </span>
-          </div>
+          </motion.div>
 
-          {/* Eerste rij — volledig */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 mb-14">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 mb-14"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={{ ...stagger, visible: { transition: { staggerChildren: 0.12 } } }}
+          >
             {PROJECTS.slice(0, 3).map((proj) => (
               <ProjectCard key={proj.slug} proj={proj} isColorful={isColorful} />
             ))}
-          </div>
+          </motion.div>
 
-          {/* Peek-rij — wegvagend */}
           <div className="relative">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 max-h-[260px] overflow-hidden">
               {PROJECTS.slice(3, 6).map((proj) => (
@@ -192,8 +233,13 @@ export default function HomePage() {
             }`} />
           </div>
 
-          {/* CTA */}
-          <div className="mt-14 flex flex-col items-center gap-5 text-center">
+          <motion.div
+            className="mt-14 flex flex-col items-center gap-5 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
               Van packaging tot UX, van print tot branding —{" "}
               <span className="text-slate-900 dark:text-white font-black">er is nog {PROJECTS.length - 3} meer te zien.</span>
@@ -209,27 +255,33 @@ export default function HomePage() {
               Bekijk alle {PROJECTS.length} werken
               <span className="inline-block transition-transform group-hover:translate-x-1.5">→</span>
             </Link>
-          </div>
+          </motion.div>
         </section>
 
         {/* ── DIENSTEN ── */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className={`p-10 rounded-[40px] border transition-all ${isColorful ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5" : "bg-transparent border-slate-200 dark:border-slate-800"}`}>
-            <div className="w-10 h-1 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 mb-6" />
-            <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">Branding</h3>
-            <p className="text-sm text-slate-500 mt-2">Ik bouw visuele fundamenten. Van logo-ontwerp tot volledige brand guides die de essentie van een merk vastleggen en consistent doorvertalen naar elk platform.</p>
-          </div>
-          <div className={`p-10 rounded-[40px] border transition-all ${isColorful ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5" : "bg-transparent border-slate-200 dark:border-slate-800"}`}>
-            <div className="w-10 h-1 rounded-full bg-gradient-to-r from-violet-600 to-indigo-500 mb-6" />
-            <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">Design</h3>
-            <p className="text-sm text-slate-500 mt-2">Gedurfd digitaal design dat werkt. Ik ontwerp interfaces (UI) en interacties die niet alleen esthetisch hoogstaand zijn, maar ook een naadloze gebruikerservaring (UX) bieden.</p>
-          </div>
-          <div className={`p-10 rounded-[40px] border transition-all ${isColorful ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5" : "bg-transparent border-slate-200 dark:border-slate-800"}`}>
-            <div className="w-10 h-1 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 mb-6" />
-            <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">Concept</h3>
-            <p className="text-sm text-slate-500 mt-2">Elk groot ontwerp begint bij een sterk idee. Ik help bij het vertalen van complexe vraagstukken naar heldere visuele concepten die een boodschap echt laten binnenkomen.</p>
-          </div>
-        </section>
+        <motion.section
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{ ...stagger, visible: { transition: { staggerChildren: 0.15 } } }}
+        >
+          {[
+            { title: "Branding", gradient: "from-pink-500 to-rose-500", text: "Ik bouw visuele fundamenten. Van logo-ontwerp tot volledige brand guides die de essentie van een merk vastleggen en consistent doorvertalen naar elk platform." },
+            { title: "Design", gradient: "from-violet-600 to-indigo-500", text: "Gedurfd digitaal design dat werkt. Ik ontwerp interfaces (UI) en interacties die niet alleen esthetisch hoogstaand zijn, maar ook een naadloze gebruikerservaring (UX) bieden." },
+            { title: "Concept", gradient: "from-orange-500 to-amber-500", text: "Elk groot ontwerp begint bij een sterk idee. Ik help bij het vertalen van complexe vraagstukken naar heldere visuele concepten die een boodschap echt laten binnenkomen." },
+          ].map(({ title, gradient, text }) => (
+            <motion.div
+              key={title}
+              variants={fadeUp}
+              className={`p-10 rounded-[40px] border transition-all ${isColorful ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5" : "bg-transparent border-slate-200 dark:border-slate-800"}`}
+            >
+              <div className={`w-10 h-1 rounded-full bg-gradient-to-r ${gradient} mb-6`} />
+              <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">{title}</h3>
+              <p className="text-sm text-slate-500 mt-2">{text}</p>
+            </motion.div>
+          ))}
+        </motion.section>
       </main>
     </div>
   )

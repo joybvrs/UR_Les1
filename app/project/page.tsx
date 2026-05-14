@@ -1,7 +1,18 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import Link from 'next/link'
+import { motion } from "framer-motion"
 import { useStyle } from "@/components/ThemeProvider"
+
+const ease = [0.25, 0.46, 0.45, 0.94] as const
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
+}
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+}
 
 interface Project {
   name: string;
@@ -47,35 +58,43 @@ export default function ProjectsOverview() {
 
       {/* HEADER */}
       <section className="relative pt-32 pb-10 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <motion.div
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8"
+          initial="hidden" animate="visible"
+          variants={{ ...stagger, visible: { transition: { staggerChildren: 0.12 } } }}
+        >
           <div className="flex flex-col gap-4">
-            <span className={`text-[10px] font-black uppercase tracking-[0.4em] px-3 py-1.5 rounded-full border w-fit ${
+            <motion.span variants={fadeUp} className={`text-[10px] font-black uppercase tracking-[0.4em] px-3 py-1.5 rounded-full border w-fit ${
               isColorful ? "border-pink-500 text-pink-600 dark:text-pink-400" : "border-slate-300 dark:border-slate-700 text-slate-500"
             }`}>
               Portfolio
-            </span>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-950 dark:text-white">
+            </motion.span>
+            <motion.h1 variants={fadeUp} className="text-6xl md:text-8xl font-black tracking-tighter text-slate-950 dark:text-white">
               SELECTED<br />
               <span className={`transition-all duration-700 ${
                 isColorful ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500" : "text-slate-900 dark:text-slate-200"
               }`}>WORKS.</span>
-            </h1>
+            </motion.h1>
           </div>
 
-          {/* Teller */}
-          <div className="flex flex-col items-start md:items-end gap-1 pb-2">
+          <motion.div variants={fadeUp} className="flex flex-col items-start md:items-end gap-1 pb-2">
             <span className="text-5xl font-black text-slate-950 dark:text-white tracking-tighter">
               {filtered.length}<span className="text-slate-300 dark:text-slate-700">/{PROJECTS_DATA.length}</span>
             </span>
             <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-400">Projecten zichtbaar</span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Categoriefilters */}
-        <div className="flex flex-wrap gap-2 mt-10">
+        <motion.div
+          className="flex flex-wrap gap-2 mt-10"
+          initial="hidden" animate="visible"
+          variants={{ ...stagger, visible: { transition: { staggerChildren: 0.06, delayChildren: 0.3 } } }}
+        >
           {CATEGORIES.map((cat) => (
-            <button
+            <motion.button
               key={cat}
+              variants={fadeUp}
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-200 border ${
                 activeCategory === cat
@@ -88,19 +107,24 @@ export default function ProjectsOverview() {
               }`}
             >
               {cat}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
       </section>
 
-      {/* EDITORIAAL GRID */}
+      {/* GRID */}
       <main className="max-w-7xl mx-auto px-6 md:px-12 pb-32 mt-12">
-
         {filtered.length === 0 && (
           <p className="text-slate-400 text-sm font-medium py-20 text-center">Geen projecten gevonden.</p>
         )}
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <motion.div
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{ ...stagger, visible: { transition: { staggerChildren: 0.08 } } }}
+        >
           {filtered.map((project) => (
             <ProjectCard
               key={project.slug}
@@ -109,7 +133,7 @@ export default function ProjectsOverview() {
               isColorful={isColorful}
             />
           ))}
-        </div>
+        </motion.div>
       </main>
 
       <footer className="py-20 text-center border-t border-slate-100 dark:border-white/5">
@@ -135,6 +159,7 @@ function ProjectCard({
   const num = String(index + 1).padStart(2, "0");
 
   return (
+    <motion.div variants={fadeUp}>
     <Link
       href={`/${project.slug}`}
       className="group flex flex-col"
@@ -188,5 +213,6 @@ function ProjectCard({
         </span>
       </div>
     </Link>
+    </motion.div>
   );
 }
