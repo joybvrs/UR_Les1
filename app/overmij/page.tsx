@@ -101,15 +101,21 @@ export default function AboutPage() {
               Over mij
             </motion.span>
 
-            <motion.h1 variants={fadeUp} className="text-[4.5rem] md:text-[6.5rem] lg:text-[7.5rem] font-black leading-[0.85] tracking-tighter text-slate-950 dark:text-white mb-8">
-              HOI, IK<br />
-              BEN{" "}
-              <span className={`transition-all duration-700 ${
-                isColorful
-                  ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500"
-                  : "text-slate-700 dark:text-slate-300"
+            <motion.h1 variants={fadeUp} className="font-black tracking-tighter text-slate-950 dark:text-white mb-8 leading-none">
+              <span className={`block text-2xl md:text-3xl font-black uppercase tracking-[0.25em] mb-3 ${
+                isColorful ? "text-pink-500" : "text-slate-400 dark:text-slate-500"
               }`}>
-                JOY.
+                Hoi, ik ben
+              </span>
+              <span className="block text-[5.5rem] md:text-[7.5rem] lg:text-[9rem] leading-[0.85]">
+                JOY
+              </span>
+              <span className={`block text-[3rem] md:text-[4.5rem] lg:text-[5.5rem] leading-[0.9] italic transition-all duration-700 ${
+                isColorful
+                  ? "text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500"
+                  : "text-slate-500 dark:text-slate-400"
+              }`}>
+                Grafisch Designer.
               </span>
             </motion.h1>
 
