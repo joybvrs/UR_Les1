@@ -43,7 +43,7 @@ export default function SurveyPopup() {
               : "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
           }`}
         >
-          ✨ Enquête
+          Enquête
         </button>
       )}
 
@@ -99,7 +99,11 @@ export default function SurveyPopup() {
         </div>
 
         {/* Embedded form */}
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden flex flex-col">
+          <p className="px-6 py-4 text-xs text-slate-400 dark:text-slate-500 leading-relaxed border-b border-slate-100 dark:border-slate-800">
+            Ik ben benieuwd naar jouw eerlijke feedback. Het invullen duurt slechts 2 minuten.
+          </p>
+          <div className="flex-1 overflow-hidden">
           <iframe
             src={SURVEY_URL}
             className="w-full h-full border-0"
@@ -107,6 +111,7 @@ export default function SurveyPopup() {
           >
             Laden…
           </iframe>
+          </div>
         </div>
 
         {/* Footer */}
