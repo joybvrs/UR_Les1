@@ -112,8 +112,8 @@ export default function AboutPage() {
               </span>
               <span className={`block text-[3rem] md:text-[4.5rem] lg:text-[5.5rem] leading-[0.9] italic transition-all duration-700 ${
                 isColorful
-                  ? "text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500"
-                  : "text-slate-500 dark:text-slate-400"
+                  ? "text-pink-500"
+                  : "text-slate-800 dark:text-slate-200"
               }`}>
                 Grafisch Designer.
               </span>
