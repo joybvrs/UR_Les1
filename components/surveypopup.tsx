@@ -35,16 +35,28 @@ export default function SurveyPopup() {
     <>
       {/* Knop rechtsonder — volledig gesloten */}
       {state === "closed" && (
-        <button
-          onClick={() => setState("open")}
-          className={`fixed bottom-6 right-6 z-[199] text-sm font-black uppercase tracking-[0.15em] px-6 py-4 rounded-2xl shadow-xl transition-all hover:scale-105 ${
+        <div className="fixed bottom-6 right-6 z-[199] flex flex-col items-end gap-2">
+          <div className={`px-4 py-2.5 rounded-2xl text-xs font-medium leading-snug max-w-[200px] text-right shadow-lg ${
             isColorful
-              ? "bg-gradient-to-r from-pink-500 to-orange-400 text-white shadow-pink-500/30"
-              : "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
-          }`}
-        >
-          Enquête
-        </button>
+              ? "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-pink-500/10"
+              : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-slate-200/50"
+          }`}>
+            Wat vind jij van mijn portfolio?<br />
+            <span className={`font-black text-[10px] uppercase tracking-wide ${isColorful ? "text-pink-500" : "text-slate-400"}`}>
+              2 minuten · anoniem
+            </span>
+          </div>
+          <button
+            onClick={() => setState("open")}
+            className={`text-sm font-black uppercase tracking-[0.15em] px-6 py-4 rounded-2xl shadow-xl transition-all hover:scale-105 ${
+              isColorful
+                ? "bg-gradient-to-r from-pink-500 to-orange-400 text-white shadow-pink-500/30"
+                : "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
+            }`}
+          >
+            Enquête
+          </button>
+        </div>
       )}
 
       {/* Tab-knop — geminimaliseerd */}
