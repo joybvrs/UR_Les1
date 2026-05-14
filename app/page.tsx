@@ -10,12 +10,12 @@ const PROJECTS = [
   { name: "Cinecity", slug: "cinecity", category: "UX/UI Design", description: "User experience design voor een bioscoopplatform.", image: "/img/cinecity.jpg" },
   { name: "Kelloggs", slug: "kelloggs", category: "Packaging", description: "Nieuwe branding voor lekkere cornflakes.", image: "/img/kelloggsdoos.jpg" },
   { name: "Leporello", slug: "leporello", category: "Print", description: "Tribute to Stefan Vanfleteren.", image: "/img/leporello.jpg" },
-  { name: "Typografische poster", slug: "typografischeposter", category: "Poster Design", description: "Typografisch poster design.", image: "/img/poster.jpg" },
-  { name: "Portfolio in data", slug: "data", category: "Web Design", description: "Webdesign met data verwerkt.", image: "/img/data.png" },
+  { name: "Typografische poster", slug: "typografischeposter", category: "Posterontwerp", description: "Typografisch posterontwerp.", image: "/img/poster.jpg" },
+  { name: "Portfolio in data", slug: "data", category: "Webdesign", description: "Webdesign met data verwerkt.", image: "/img/data.png" },
   { name: "Sneaker", slug: "sneaker", category: "Promotie", description: "Visuele promotie sneaker.", image: "/img/nike.png" },
 ]
 
-const TICKER = ["Branding", "UX/UI Design", "Packaging", "Print", "Identiteit", "Web Design", "Concept", "Poster Design"]
+const TICKER = ["Branding", "UX/UI Design", "Verpakking", "Print", "Identiteit", "Webdesign", "Concept", "Posterontwerp"]
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const
 
@@ -97,7 +97,7 @@ export default function HomePage() {
               animate="visible"
               variants={stagger}
             >
-              {["CREATE", "IMPACT."].map((line) => (
+              {["CREËER", "IMPACT."].map((line) => (
                 <motion.span key={line} className="block" variants={fadeUp}>{line}</motion.span>
               ))}
               <motion.span
@@ -108,7 +108,7 @@ export default function HomePage() {
                 }`}
                 variants={fadeUp}
               >
-                DESIGN.
+                ONTWERP.
               </motion.span>
             </motion.h1>
 
@@ -121,7 +121,7 @@ export default function HomePage() {
               {[
                 { value: `${PROJECTS.length}`, label: "Projecten" },
                 { value: "5+", label: "Categorieën" },
-                { value: "Antwerpen", label: "Based in" },
+                { value: "Antwerpen", label: "Gevestigd" },
               ].map(({ value, label }) => (
                 <motion.div key={label} className="flex flex-col" variants={fadeUp}>
                   <span className="text-3xl font-black text-slate-950 dark:text-white tracking-tighter">{value}</span>

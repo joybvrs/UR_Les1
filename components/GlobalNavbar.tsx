@@ -170,7 +170,7 @@ export default function GlobalNavbar() {
           <div className={`flex-1 flex flex-col justify-center px-10 md:px-20 space-y-6 transition-opacity duration-300 ${isMenuOpen ? "opacity-100" : "opacity-0"}`}>
             <div className={`h-[1px] w-12 ${isColorful ? "bg-pink-500" : "bg-slate-900 dark:bg-white"}`} />
             <div className={isColorful ? "text-white" : "text-slate-900 dark:text-white"}>
-              <p className={`text-[9px] font-bold uppercase tracking-[0.4em] mb-3 ${isColorful ? "text-indigo-300" : "text-slate-400"}`}>Member area</p>
+              <p className={`text-[9px] font-bold uppercase tracking-[0.4em] mb-3 ${isColorful ? "text-indigo-300" : "text-slate-400"}`}>Ledenzone</p>
               <button
                 onClick={() => handleNavigation('/login', 'login')}
                 disabled={isAnimating}
@@ -178,7 +178,7 @@ export default function GlobalNavbar() {
                   isColorful ? "hover:text-pink-400" : "hover:opacity-40"
                 }`}
               >
-                LOGIN →
+                INLOGGEN →
               </button>
               <button
                 onClick={() => handleNavigation('/admin', 'admin')}

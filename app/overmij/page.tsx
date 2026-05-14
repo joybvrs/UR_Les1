@@ -15,8 +15,8 @@ const stagger = (delay = 0) => ({
 })
 
 const SKILLS = [
-  "Visual Design", "Branding", "UI/UX", "Typography",
-  "Packaging", "Print", "Fotografie", "Concept",
+  "Visueel Ontwerp", "Branding", "UI/UX", "Typografie",
+  "Verpakking", "Print", "Fotografie", "Concept",
 ]
 
 const JOURNEY = [
@@ -161,7 +161,7 @@ export default function AboutPage() {
               }`}>
                 <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${
                   isColorful ? "text-slate-400" : "text-white dark:text-slate-950"
-                }`}>Based in</span>
+                }`}>Gevestigd in</span>
                 <p className={`text-sm font-black tracking-tight ${
                   isColorful ? "text-slate-950 dark:text-white" : "text-white dark:text-slate-950"
                 }`}>Antwerpen</p>

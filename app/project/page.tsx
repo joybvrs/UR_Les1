@@ -28,8 +28,8 @@ const PROJECTS_DATA: Project[] = [
   { name: "Cinecity", slug: "cinecity", category: "UX/UI Design", description: "User experience design voor een bioscoopplatform.", image: "/img/cinecity.jpg" },
   { name: "Kelloggs", slug: "kelloggs", category: "Packaging", description: "Nieuwe branding voor lekkere cornflakes.", image: "/img/kelloggsdoos.jpg" },
   { name: "Leporello", slug: "leporello", category: "Print", description: "Tribute to Stefan Vanfleteren.", image: "/img/leporello.jpg" },
-  { name: "Typografische poster", slug: "typografischeposter", category: "Poster Design", description: "Typografisch poster design.", image: "/img/poster.jpg" },
-  { name: "Portfolio in data", slug: "data", category: "Web Design", description: "Webdesign met data verwerkt.", image: "/img/data.png" },
+  { name: "Typografische poster", slug: "typografischeposter", category: "Posterontwerp", description: "Typografisch posterontwerp.", image: "/img/poster.jpg" },
+  { name: "Portfolio in data", slug: "data", category: "Webdesign", description: "Webdesign met data verwerkt.", image: "/img/data.png" },
   { name: "Sneaker", slug: "sneaker", category: "Promotie", description: "Visuele promotie sneaker.", image: "/img/nike.png" },
 ];
 
@@ -70,10 +70,10 @@ export default function ProjectsOverview() {
               Portfolio
             </motion.span>
             <motion.h1 variants={fadeUp} className="text-6xl md:text-8xl font-black tracking-tighter text-slate-950 dark:text-white">
-              SELECTED<br />
+              MIJN<br />
               <span className={`transition-all duration-700 ${
                 isColorful ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-orange-500" : "text-slate-900 dark:text-slate-200"
-              }`}>WORKS.</span>
+              }`}>WERKEN.</span>
             </motion.h1>
           </div>
 
