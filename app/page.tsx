@@ -97,7 +97,7 @@ export default function HomePage() {
               animate="visible"
               variants={stagger}
             >
-              {["CREËER", "IMPACT."].map((line) => (
+              {["JOUW IDEE,", "MIJN"].map((line) => (
                 <motion.span key={line} className="block" variants={fadeUp}>{line}</motion.span>
               ))}
               <motion.span
@@ -108,7 +108,7 @@ export default function HomePage() {
                 }`}
                 variants={fadeUp}
               >
-                ONTWERP.
+                VERHAAL.
               </motion.span>
             </motion.h1>
 
