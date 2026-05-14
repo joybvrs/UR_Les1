@@ -8,20 +8,20 @@ export default function CookieSettings() {
 
   const cookies = [
     {
-      title: "Essential Cookies",
-      text: `These cookies are necessary for the website to function and cannot be turned off. They ensure basic functionalities such as page navigation, security, and access to secure areas of the site.`
+      title: "Noodzakelijke cookies",
+      text: `Deze cookies zijn vereist voor het correct functioneren van de website en kunnen niet worden uitgeschakeld. Ze zorgen voor basisfunctionaliteiten zoals paginanavigatie, beveiliging en toegang tot beveiligde onderdelen van de site.`
     },
     {
-      title: "Performance & Analytics Cookies",
-      text: `These cookies help us understand how visitors interact with our website, allowing us to improve performance and provide a better user experience.`
+      title: "Prestatie- & analysecookies",
+      text: `Deze cookies helpen ons te begrijpen hoe bezoekers de website gebruiken, zodat we de prestaties kunnen verbeteren en een betere gebruikerservaring kunnen bieden.`
     },
     {
-      title: "Functional Cookies",
-      text: `Functional cookies enable enhanced features and personalization, such as remembering your preferences or login information.`
+      title: "Functionele cookies",
+      text: `Functionele cookies maken verbeterde functies en personalisatie mogelijk, zoals het onthouden van jouw voorkeuren of inloggegevens.`
     },
     {
-      title: "Advertising & Targeting Cookies",
-      text: `These cookies are used to deliver relevant advertisements based on your interests and browsing behavior. They may also limit the number of times you see an ad and help measure ad campaign effectiveness.`
+      title: "Reclame- & targetingcookies",
+      text: `Deze cookies worden gebruikt om relevante advertenties te tonen op basis van jouw interesses en surfgedrag. Ze kunnen ook het aantal keer dat je een advertentie ziet beperken en de effectiviteit van campagnes meten.`
     },
   ]
 
@@ -39,13 +39,13 @@ export default function CookieSettings() {
             Juridisch
           </span>
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-950 dark:text-white">
-            COOKIE <br />
+            COOKIE<br />
             <span className={`transition-all duration-700 ${
               isColorful ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400" : "text-slate-900 dark:text-slate-200"
-            }`}>SETTINGS.</span>
+            }`}>BELEID.</span>
           </h1>
           <p className="text-slate-500 dark:text-slate-400 max-w-xl text-sm font-medium leading-relaxed mt-2">
-            We use cookies to enhance your experience on our website, analyze site traffic, and provide personalized content. Some cookies are essential for the site to function, while others help us improve your experience.
+            Wij gebruiken cookies om jouw ervaring te verbeteren, het websiteverkeer te analyseren en gepersonaliseerde inhoud aan te bieden. Sommige cookies zijn essentieel voor de werking van de site, andere helpen ons jouw ervaring te verbeteren.
           </p>
         </div>
       </section>
@@ -55,8 +55,8 @@ export default function CookieSettings() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {cookies.map((cookie, index) => (
             <div key={index} className={`rounded-[24px] p-8 border transition-all duration-300 ${
-              isColorful 
-                ? "bg-white dark:bg-white/5 border-pink-100 dark:border-white/10 hover:border-pink-300 dark:hover:border-pink-500/30" 
+              isColorful
+                ? "bg-white dark:bg-white/5 border-pink-100 dark:border-white/10 hover:border-pink-300 dark:hover:border-pink-500/30"
                 : "bg-slate-50 dark:bg-white/5 border-slate-100 dark:border-white/10 hover:border-slate-300"
             }`}>
               <div className="flex items-center gap-3 mb-4">
@@ -82,25 +82,25 @@ export default function CookieSettings() {
         {/* BUTTONS */}
         <div className="mt-12 flex flex-col sm:flex-row gap-4 max-w-2xl">
           <button className={`flex-1 py-4 rounded-full text-[10px] font-black uppercase tracking-widest text-white transition-all hover:scale-105 ${
-            isColorful 
-              ? "bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400 shadow-lg shadow-pink-200 dark:shadow-pink-900/30" 
+            isColorful
+              ? "bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400 shadow-lg shadow-pink-200 dark:shadow-pink-900/30"
               : "bg-slate-950 dark:bg-white dark:text-slate-950"
           }`}>
-            Accept All
+            Alles accepteren
           </button>
           <button className={`flex-1 py-4 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 border ${
-            isColorful 
-              ? "border-pink-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-pink-400" 
+            isColorful
+              ? "border-pink-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-pink-400"
               : "border-slate-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-slate-400"
           }`}>
-            Reject Non-Essential
+            Alleen noodzakelijk
           </button>
           <button className={`flex-1 py-4 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 border ${
-            isColorful 
-              ? "border-pink-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-pink-400" 
+            isColorful
+              ? "border-pink-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-pink-400"
               : "border-slate-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-slate-400"
           }`}>
-            Customize
+            Aanpassen
           </button>
         </div>
       </main>

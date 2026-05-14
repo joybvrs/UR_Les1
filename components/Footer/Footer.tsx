@@ -30,9 +30,9 @@ export default function Footer() {
         {/* RECHTERKANT: Juridisch + Copyright (Duidelijker leesbaar) */}
         <div className="flex flex-col items-center md:items-end gap-3">
           <div className="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-2 font-bold uppercase tracking-widest text-[10px] opacity-80">
-            <Link href="/terms-of-agreement" className="hover:underline transition-all">Terms of Agreement</Link>
-            <Link href="/copyright-regulations" className="hover:underline transition-all">Copyright</Link>
-            <Link href="/cookie-settings" className="hover:underline transition-all">Cookies</Link>
+            <Link href="/terms-of-agreement" className="hover:underline transition-all">Gebruiksvoorwaarden</Link>
+            <Link href="/copyright-regulations" className="hover:underline transition-all">Auteursrecht</Link>
+            <Link href="/cookie-settings" className="hover:underline transition-all">Cookiebeleid</Link>
           </div>
           
           <p className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-50 text-center md:text-right">

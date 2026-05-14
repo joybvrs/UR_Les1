@@ -8,24 +8,24 @@ export default function CopyrightRegulations() {
 
   const items = [
     {
-      title: "General Policy",
-      text: `All content on this website, including text, images, videos, and software, is protected by copyright laws unless otherwise stated. Unauthorized use or distribution of copyrighted material is strictly prohibited.`
+      title: "Algemeen beleid",
+      text: `Alle inhoud op deze website, inclusief tekst, afbeeldingen, video's en software, is beschermd door auteursrechtelijke wetgeving, tenzij anders vermeld. Ongeoorloofd gebruik of verspreiding van auteursrechtelijk beschermd materiaal is strikt verboden.`
     },
     {
-      title: "Fair Use & Permissions",
-      text: `Certain uses of copyrighted material may fall under fair use, such as commentary, criticism, or educational purposes. For other uses, you must obtain written permission from the copyright owner.`
+      title: "Eerlijk gebruik & toestemming",
+      text: `Bepaald gebruik van auteursrechtelijk beschermd materiaal kan vallen onder eerlijk gebruik, zoals commentaar, kritiek of educatieve doeleinden. Voor ander gebruik dien je schriftelijke toestemming te verkrijgen van de rechthebbende.`
     },
     {
-      title: "Reporting Copyright Infringement",
-      text: `If you believe your work has been used in violation of copyright laws on this website, please contact us immediately with a detailed report. We will investigate and take appropriate action.`
+      title: "Inbreuk melden",
+      text: `Als je van mening bent dat jouw werk onrechtmatig wordt gebruikt op deze website, neem dan onmiddellijk contact met ons op met een gedetailleerd rapport. Wij zullen de situatie onderzoeken en passende maatregelen nemen.`
     },
     {
-      title: "User Responsibilities",
-      text: `Users must not upload or share content that infringes on copyright. By using this website, you agree to comply with copyright laws and respect the intellectual property of others.`
+      title: "Verantwoordelijkheden van de gebruiker",
+      text: `Gebruikers mogen geen inhoud uploaden of delen die inbreuk maakt op auteursrechten. Door gebruik te maken van deze website ga je akkoord met de auteursrechtelijke wetgeving en respecteer je de intellectuele eigendom van anderen.`
     },
     {
-      title: "Licensing Information",
-      text: `Some content may be available under licenses that allow reuse, modification, or distribution. Always check the license terms before using such material.`
+      title: "Licentie-informatie",
+      text: `Sommige inhoud kan beschikbaar zijn onder licenties die hergebruik, aanpassing of verspreiding toestaan. Controleer altijd de licentievoorwaarden voordat je dergelijk materiaal gebruikt.`
     },
   ]
 
@@ -43,13 +43,13 @@ export default function CopyrightRegulations() {
             Juridisch
           </span>
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-slate-950 dark:text-white">
-            COPYRIGHT <br />
+            AUTEURS<br />
             <span className={`transition-all duration-700 ${
               isColorful ? "italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400" : "text-slate-900 dark:text-slate-200"
-            }`}>REGULATIONS.</span>
+            }`}>RECHT.</span>
           </h1>
           <p className="text-slate-500 dark:text-slate-400 max-w-xl text-sm font-medium leading-relaxed mt-2">
-            We respect intellectual property rights and expect our users to do the same. This page outlines our copyright policies, how to handle copyrighted material, and your responsibilities as a user.
+            Wij respecteren intellectuele eigendomsrechten en verwachten hetzelfde van onze gebruikers. Op deze pagina vind je ons auteursrechtbeleid en jouw verantwoordelijkheden als gebruiker.
           </p>
         </div>
       </section>
@@ -59,8 +59,8 @@ export default function CopyrightRegulations() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {items.map((item, index) => (
             <div key={index} className={`rounded-[24px] p-8 border transition-all duration-300 ${
-              isColorful 
-                ? "bg-white dark:bg-white/5 border-pink-100 dark:border-white/10 hover:border-pink-300 dark:hover:border-pink-500/30" 
+              isColorful
+                ? "bg-white dark:bg-white/5 border-pink-100 dark:border-white/10 hover:border-pink-300 dark:hover:border-pink-500/30"
                 : "bg-slate-50 dark:bg-white/5 border-slate-100 dark:border-white/10 hover:border-slate-300"
             }`}>
               <div className="flex items-center gap-3 mb-4">
@@ -86,18 +86,18 @@ export default function CopyrightRegulations() {
         {/* BUTTONS */}
         <div className="mt-12 flex flex-col sm:flex-row gap-4 max-w-lg">
           <button className={`flex-1 py-4 rounded-full text-[10px] font-black uppercase tracking-widest text-white transition-all hover:scale-105 ${
-            isColorful 
-              ? "bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400 shadow-lg shadow-pink-200 dark:shadow-pink-900/30" 
+            isColorful
+              ? "bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400 shadow-lg shadow-pink-200 dark:shadow-pink-900/30"
               : "bg-slate-950 dark:bg-white dark:text-slate-950"
           }`}>
-            Acknowledge
+            Begrepen
           </button>
           <Link href="/contact" className={`flex-1 py-4 rounded-full text-[10px] font-black uppercase tracking-widest text-center transition-all hover:scale-105 border ${
-            isColorful 
-              ? "border-pink-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-pink-400" 
+            isColorful
+              ? "border-pink-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-pink-400"
               : "border-slate-200 dark:border-white/10 text-slate-950 dark:text-white hover:border-slate-400"
           }`}>
-            Learn More
+            Meer info
           </Link>
         </div>
       </main>
