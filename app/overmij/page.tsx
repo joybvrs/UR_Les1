@@ -166,34 +166,56 @@ export default function AboutPage() {
 
         {/* ── JOURNEY ── */}
         <section className="mb-28">
-          <h2 className="text-4xl font-black tracking-tighter text-slate-950 dark:text-white mb-14">
-            Hoe ik hier<br />
-            <span className={`italic ${isColorful ? "text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500" : "text-slate-500 dark:text-slate-400"}`}>
-              ben geraakt.
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+            <h2 className="text-4xl font-black tracking-tighter text-slate-950 dark:text-white">
+              Hoe ik hier<br />
+              <span className={`italic ${isColorful ? "text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500" : "text-slate-500 dark:text-slate-400"}`}>
+                ben geraakt.
+              </span>
+            </h2>
+            <span className={`text-[9px] font-black uppercase tracking-[0.3em] pb-1 ${isColorful ? "text-pink-500" : "text-slate-400"}`}>
+              3 hoofdstukken
             </span>
-          </h2>
+          </div>
 
-          <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger(0)}>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-5"
+            initial="hidden" whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={stagger(0)}
+          >
             {JOURNEY.map((step, i) => (
-              <motion.div key={i} variants={fadeUp} className={`p-8 rounded-[32px] border flex flex-col gap-5 ${
-                isColorful
-                  ? "bg-white dark:bg-white/5 border-slate-100 dark:border-white/5"
-                  : "bg-transparent border-slate-200 dark:border-slate-800"
-              }`}>
-                <div className={`w-10 h-1 rounded-full bg-gradient-to-r ${step.accent}`} />
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                className={`relative overflow-hidden rounded-[36px] p-8 flex flex-col justify-between min-h-[340px] group ${
+                  isColorful
+                    ? "bg-white dark:bg-white/5 border border-slate-100 dark:border-white/5"
+                    : "bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-slate-800"
+                }`}
+              >
+                {/* Decoratief groot nummer achtergrond */}
+                <span className={`absolute -bottom-4 -right-2 text-[9rem] font-black leading-none select-none pointer-events-none bg-gradient-to-br ${step.accent} text-transparent bg-clip-text opacity-10`}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                {/* Boven: label + accent */}
                 <div>
-                  <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${
-                    isColorful ? "text-pink-500" : "text-slate-400"
-                  }`}>
-                    {step.period}
-                  </span>
-                  <h3 className="text-lg font-black text-slate-950 dark:text-white tracking-tighter mt-1">
+                  <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.25em] mb-6 bg-gradient-to-r ${step.accent}`}>
+                    <span className="text-white">{step.period}</span>
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-950 dark:text-white tracking-tighter leading-tight">
                     {step.place}
                   </h3>
                 </div>
-                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                  {step.description}
-                </p>
+
+                {/* Onder: beschrijving */}
+                <div>
+                  <div className={`w-8 h-[2px] rounded-full bg-gradient-to-r ${step.accent} mb-4`} />
+                  <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
